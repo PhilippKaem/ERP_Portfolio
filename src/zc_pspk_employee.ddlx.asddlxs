@@ -1,0 +1,53 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo: 
+{ 
+typeNamePlural:'Employees',
+typeName: 'Employee',
+title.value: 'EmpEmployeeNumber',
+description.value: 'EmpLastName'
+}
+annotate entity ZC_PSPK_EMPLOYEE
+    with 
+{
+/*Facets*/
+
+@UI.facet: [
+{ position:10, type: #FIELDGROUP_REFERENCE, targetQualifier: 'EmployeeInformation', label: 'Employee Information' },
+{ position:20, type: #FIELDGROUP_REFERENCE, targetQualifier: 'AdminData', label: 'Adminstrative Data' }
+]
+
+/*Fields*/
+    @UI.fieldGroup: [{ position:10, qualifier: 'AdminData' }]
+    Id;
+    
+    @UI.lineItem: [{ position: 10 }]
+    @UI.selectionField: [{ position: 10 }]
+    @UI.fieldGroup: [{ position:10, qualifier: 'EmployeeInformation' }]
+    EmpEmployeeNumber;
+    
+    @UI.lineItem: [{ position: 20 }]
+    @UI.fieldGroup: [{ position:20, qualifier: 'EmployeeInformation' }]
+    EmpFirstName;
+    
+    @UI.lineItem: [{ position: 30 }]  
+    @UI.fieldGroup: [{ position:30, qualifier: 'EmployeeInformation' }]
+    EmpLastName;
+    
+    @UI.lineItem: [{ position: 40 }]
+    @UI.selectionField: [{ position: 20 }]    
+    @UI.fieldGroup: [{ position:40, qualifier: 'EmployeeInformation' }]
+    EmpEntranceDate;
+    
+    @UI.fieldGroup: [{ position:20, qualifier: 'AdminData' }]
+    CreatedBy;
+    
+    @UI.fieldGroup: [{ position:30, qualifier: 'AdminData' }]
+    CreatedAt;
+    
+    @UI.fieldGroup: [{ position:40, qualifier: 'AdminData' }]
+    LastChangedBy;
+    
+    @UI.fieldGroup: [{ position:50, qualifier: 'AdminData' }]
+    LastChangedAt;
+    
+}

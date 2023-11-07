@@ -1,0 +1,4 @@
+@EndUserText.label: 'Employee'
+define service ZUI_PSPK_EMPLOYEE {
+  expose ZC_PSPK_EMPLOYEE as Employee;
+}
