@@ -11,7 +11,8 @@ ENDCLASS.
 
 
 
-CLASS zcl_zpspk_employee_class IMPLEMENTATION.
+CLASS ZCL_ZPSPK_EMPLOYEE_CLASS IMPLEMENTATION.
+
 
 METHOD if_oo_adt_classrun~main.
 
@@ -60,5 +61,4 @@ METHOD if_oo_adt_classrun~main.
   INSERT ZPSPK_EMP_DB FROM TABLE @employees.
 
   ENDMETHOD.
-
 ENDCLASS.

@@ -12,7 +12,7 @@
     <SCRLEN3>40</SCRLEN3>
     <DDTEXT>employee number</DDTEXT>
     <REPTEXT>Employee Number</REPTEXT>
-    <SCRTEXT_S>EmployeeNr</SCRTEXT_S>
+    <SCRTEXT_S>Emp. Nr.</SCRTEXT_S>
     <SCRTEXT_M>Employee Number</SCRTEXT_M>
     <SCRTEXT_L>Employee Number</SCRTEXT_L>
     <DTELMASTER>E</DTELMASTER>

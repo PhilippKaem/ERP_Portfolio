@@ -6,7 +6,7 @@ typeName: 'Employee',
 title.value: 'EmpEmployeeNumber',
 description.value: 'EmpLastName'
 }
-annotate entity ZC_PSPK_EMPLOYEE
+annotate entity ZC_PSPK_Employee
     with 
 {
 /*Facets*/

@@ -11,10 +11,10 @@
     <SCRLEN2>20</SCRLEN2>
     <SCRLEN3>40</SCRLEN3>
     <DDTEXT>start date</DDTEXT>
-    <REPTEXT>Startingdate</REPTEXT>
-    <SCRTEXT_S>Startdate</SCRTEXT_S>
-    <SCRTEXT_M>Startingdate</SCRTEXT_M>
-    <SCRTEXT_L>Startingdate</SCRTEXT_L>
+    <REPTEXT>Start Date</REPTEXT>
+    <SCRTEXT_S>Start Date</SCRTEXT_S>
+    <SCRTEXT_M>Start Date</SCRTEXT_M>
+    <SCRTEXT_L>Start Date</SCRTEXT_L>
     <DTELMASTER>E</DTELMASTER>
     <REFKIND>D</REFKIND>
     <ABAP_LANGUAGE_VERSION>5</ABAP_LANGUAGE_VERSION>
