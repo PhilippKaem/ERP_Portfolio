@@ -31,7 +31,7 @@ METHOD if_oo_adt_classrun~main.
   get time STAMP FIELD employee-created_at.
   employee-last_changed_by = 'PK'.
   GET TIME STAMP FIELD employee-last_changed_at.
-  employee-id = '0000001'.
+  employee-id = cl_system_uuid=>create_uuid_x16_static( ).
   append employee TO employees.
 
   employee-emp_employee_number = 2.
@@ -43,7 +43,7 @@ METHOD if_oo_adt_classrun~main.
   get time STAMP FIELD employee-created_at.
   employee-last_changed_by = 'PK'.
   GET TIME STAMP FIELD employee-last_changed_at.
-  employee-id = '0000002'.
+  employee-id = cl_system_uuid=>create_uuid_x16_static( ).
   append employee TO employees.
 
   employee-emp_employee_number = 3.
@@ -55,7 +55,7 @@ METHOD if_oo_adt_classrun~main.
   get time STAMP FIELD employee-created_at.
   employee-last_changed_by = 'PK'.
   GET TIME STAMP FIELD employee-last_changed_at.
-  employee-id = '0000003'.
+  employee-id = cl_system_uuid=>create_uuid_x16_static( ).
   append employee TO employees.
 
   INSERT ZPSPK_EMP_DB FROM TABLE @employees.
