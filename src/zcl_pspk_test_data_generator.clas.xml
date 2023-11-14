@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>ZCL_ZPSPK_EMPLOYEE_CLASS</CLSNAME>
+    <CLSNAME>ZCL_PSPK_TEST_DATA_GENERATOR</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>employee data</DESCRIPT>
+    <DESCRIPT>Test Data Generator</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
