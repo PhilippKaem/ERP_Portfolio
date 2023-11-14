@@ -39,6 +39,29 @@ METHOD if_oo_adt_classrun~main.
   employee-id = cl_system_uuid=>create_uuid_x16_static( ).
   append employee TO employees.
 
+  vacation_entitlement-client = sy-mandt.
+  get time STAMP FIELD vacation_entitlement-created_at.
+  get time STAMP FIELD vacation_entitlement-last_changed_at.
+  vacation_entitlement-created_by = 'PS'.
+  vacation_entitlement-last_changed_by = 'PS'.
+  vacation_entitlement-id = cl_system_uuid=>create_uuid_x16_static( ).
+  vacation_entitlement-vac_ent_year = 2022.
+  vacation_entitlement-vac_vacation_days = 30.
+  vacation_entitlement-vac_ent_employee = employee-id.
+  append vacation_entitlement TO vacation_entitlements.
+
+  vacation_entitlement-client = sy-mandt.
+  get time STAMP FIELD vacation_entitlement-created_at.
+  get time STAMP FIELD vacation_entitlement-last_changed_at.
+  vacation_entitlement-created_by = 'PS'.
+  vacation_entitlement-last_changed_by = 'PS'.
+  vacation_entitlement-id = cl_system_uuid=>create_uuid_x16_static( ).
+  vacation_entitlement-vac_ent_year = 2023.
+  vacation_entitlement-vac_vacation_days = 30.
+  vacation_entitlement-vac_ent_employee = employee-id.
+  append vacation_entitlement TO vacation_entitlements.
+
+
   employee-emp_employee_number = 2.
   employee-emp_first_name = 'Lisa'.
   employee-emp_last_name = 'Müller'.
@@ -50,6 +73,18 @@ METHOD if_oo_adt_classrun~main.
   GET TIME STAMP FIELD employee-last_changed_at.
   employee-id = cl_system_uuid=>create_uuid_x16_static( ).
   append employee TO employees.
+
+  vacation_entitlement-client = sy-mandt.
+  get time STAMP FIELD vacation_entitlement-created_at.
+  get time STAMP FIELD vacation_entitlement-last_changed_at.
+  vacation_entitlement-created_by = 'PS'.
+  vacation_entitlement-last_changed_by = 'PS'.
+  vacation_entitlement-id = cl_system_uuid=>create_uuid_x16_static( ).
+  vacation_entitlement-vac_ent_year = 2023.
+  vacation_entitlement-vac_vacation_days = 30.
+  vacation_entitlement-vac_ent_employee = employee-id.
+  append vacation_entitlement TO vacation_entitlements.
+
 
   employee-emp_employee_number = 3.
   employee-emp_first_name = 'Petra'.
@@ -63,42 +98,6 @@ METHOD if_oo_adt_classrun~main.
   employee-id = cl_system_uuid=>create_uuid_x16_static( ).
   append employee TO employees.
 
-  INSERT ZPSPK_EMP_DB FROM TABLE @employees.
-
-
-  vacation_entitlement-client = sy-mandt.
-  get time STAMP FIELD vacation_entitlement-created_at.
-  get time STAMP FIELD vacation_entitlement-last_changed_at.
-  vacation_entitlement-created_by = 'PS'.
-  vacation_entitlement-last_changed_by = 'PS'.
-  vacation_entitlement-id = cl_system_uuid=>create_uuid_x16_static( ).
-  vacation_entitlement-vac_ent_year = 2022.
-  vacation_entitlement-vac_vacation_days = 30.
-  vacation_entitlement-vac_ent_employee = 'Hans Maier'.
-  append vacation_entitlement TO vacation_entitlements.
-
-  vacation_entitlement-client = sy-mandt.
-  get time STAMP FIELD vacation_entitlement-created_at.
-  get time STAMP FIELD vacation_entitlement-last_changed_at.
-  vacation_entitlement-created_by = 'PS'.
-  vacation_entitlement-last_changed_by = 'PS'.
-  vacation_entitlement-id = cl_system_uuid=>create_uuid_x16_static( ).
-  vacation_entitlement-vac_ent_year = 2023.
-  vacation_entitlement-vac_vacation_days = 30.
-  vacation_entitlement-vac_ent_employee = 'Hans Maier'.
-  append vacation_entitlement TO vacation_entitlements.
-
-  vacation_entitlement-client = sy-mandt.
-  get time STAMP FIELD vacation_entitlement-created_at.
-  get time STAMP FIELD vacation_entitlement-last_changed_at.
-  vacation_entitlement-created_by = 'PS'.
-  vacation_entitlement-last_changed_by = 'PS'.
-  vacation_entitlement-id = cl_system_uuid=>create_uuid_x16_static( ).
-  vacation_entitlement-vac_ent_year = 2023.
-  vacation_entitlement-vac_vacation_days = 30.
-  vacation_entitlement-vac_ent_employee = 'Lisa Müller'.
-  append vacation_entitlement TO vacation_entitlements.
-
   vacation_entitlement-client = sy-mandt.
   get time STAMP FIELD vacation_entitlement-created_at.
   get time STAMP FIELD vacation_entitlement-last_changed_at.
@@ -107,9 +106,11 @@ METHOD if_oo_adt_classrun~main.
   vacation_entitlement-id = cl_system_uuid=>create_uuid_x16_static( ).
   vacation_entitlement-vac_ent_year = 2023.
   vacation_entitlement-vac_vacation_days = 7.
-  vacation_entitlement-vac_ent_employee = 'Petra Schmid'.
+  vacation_entitlement-vac_ent_employee = employee-id.
   append vacation_entitlement TO vacation_entitlements.
 
+
+  INSERT ZPSPK_EMP_DB FROM TABLE @employees.
   INSERT zpspk_vac_ent_db FROM TABLE @vacation_entitlements.
 
 

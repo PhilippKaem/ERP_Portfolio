@@ -6,7 +6,9 @@
 "ZPSPK_EMP_DB"
 ],
 "ASSOCIATED":
-[],
+[
+"ZR_PSPK_VACATION_ENTITLEMENT"
+],
 "BASE":
 [],
 "ANNO_REF":
