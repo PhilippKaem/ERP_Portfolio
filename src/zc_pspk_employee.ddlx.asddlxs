@@ -1,3 +1,5 @@
+
+
 @Metadata.layer: #CUSTOMER
 @UI.headerInfo: 
 { 
@@ -18,7 +20,7 @@ annotate entity ZC_PSPK_Employee
 
 /*Fields*/
     @UI.fieldGroup: [{ position:10, qualifier: 'AdminData' }]
-    Id;
+    EmployeeId;
     
     @UI.lineItem: [{ position: 10 }]
     @UI.selectionField: [{ position: 10 }]

@@ -1,4 +1,5 @@
 @EndUserText.label: 'Employee'
 define service ZUI_PSPK_EMPLOYEE {
-  expose ZC_PSPK_EMPLOYEE as Employee;
+  expose ZC_PSPK_Employee             as Employee;
+  expose ZC_PSPK_Vacation_Entitlement as VacationEntitlement;
 }

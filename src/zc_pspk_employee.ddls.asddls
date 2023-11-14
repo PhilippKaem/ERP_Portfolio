@@ -4,7 +4,7 @@
 @Metadata.allowExtensions: true
 define root view entity ZC_PSPK_Employee as projection on ZR_PSPK_Employee
 {
-    key Id,
+    key EmployeeId,
     EmpEmployeeNumber,
     
     @Search.defaultSearchElement: true

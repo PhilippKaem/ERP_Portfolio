@@ -1,9 +1,9 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Employee'
 define root view entity ZR_PSPK_Employee as select from zpspk_emp_db
-composition [0..*] of ZR_PSPK_Vacation_Entitlement as _VacationEntitlements
+ composition [0..*] of ZR_PSPK_Vacation_Entitlement as _VacationEntitlements
 {
-    key id as Id,
+    key id as EmployeeId,
     emp_employee_number as EmpEmployeeNumber,
     emp_first_name as EmpFirstName,
     emp_last_name as EmpLastName,

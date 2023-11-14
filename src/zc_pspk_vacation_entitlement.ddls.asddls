@@ -1,8 +1,9 @@
+
 @EndUserText.label: 'Vacation Entitlement'
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 define view entity ZC_PSPK_Vacation_Entitlement as projection on ZR_PSPK_Vacation_Entitlement
 {
-    key Id,
+    key VaciationEntitlementId,
     VacEntEmployee,
     VacEntYear,
     VacVacationDays,
