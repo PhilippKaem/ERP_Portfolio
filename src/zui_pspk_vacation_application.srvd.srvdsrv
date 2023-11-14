@@ -1,0 +1,4 @@
+@EndUserText.label: 'Vacation Application, App 2'
+define service ZUI_PSPK_VACATION_APPLICATION {
+  expose ZC_PSPK_Vacation_Application_2;
+}

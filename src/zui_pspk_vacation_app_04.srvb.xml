@@ -4,9 +4,9 @@
   <asx:values>
    <SRVB>
     <METADATA>
-     <NAME>ZUI_PSPK_EMPLOYEE</NAME>
+     <NAME>ZUI_PSPK_VACATION_APP_04</NAME>
      <TYPE>SRVB/SVB</TYPE>
-     <DESCRIPTION>Employee</DESCRIPTION>
+     <DESCRIPTION>Vacation Application, App 2</DESCRIPTION>
      <LANGUAGE>EN</LANGUAGE>
      <LINKS>
       <item>
@@ -15,7 +15,7 @@
        <TITLE>Historic versions</TITLE>
       </item>
       <item>
-       <HREF>/sap/bc/adt/businessservices/odatav4/ZUI_PSPK_EMPLOYEE</HREF>
+       <HREF>/sap/bc/adt/businessservices/odatav4/ZUI_PSPK_VACATION_APP_04</HREF>
        <REL>http://www.sap.com/categories/odatav4</REL>
        <TYPE>application/vnd.sap.adt.businessservices.odatav4.v1+xml</TYPE>
        <TITLE>ODATAV4</TITLE>
@@ -44,21 +44,21 @@
     </METADATA>
     <CONTENT>
      <BIND_TYPE_IMPL>
-      <NAME>ZUI_PSPK_EMPLOYEE</NAME>
+      <NAME>ZUI_PSPK_VACATION_APP_04</NAME>
      </BIND_TYPE_IMPL>
      <BIND_TYPE>ODATA</BIND_TYPE>
      <BIND_TYPE_VERSION>V4</BIND_TYPE_VERSION>
      <SERVICES>
       <item>
-       <SERVICE_NAME>ZUI_PSPK_EMPLOYEE</SERVICE_NAME>
+       <SERVICE_NAME>ZUI_PSPK_VACATION_APPLICATION</SERVICE_NAME>
        <SERVICE_CONTENT>
         <item>
          <SERVICE_VERSION>0001</SERVICE_VERSION>
          <RELEASE_STATE>NOT_RELEASED</RELEASE_STATE>
          <SRVD_REF>
-          <URI>/sap/bc/adt/ddic/srvd/sources/zui_pspk_employee</URI>
+          <URI>/sap/bc/adt/ddic/srvd/sources/zui_pspk_vacation_application</URI>
           <TYPE>SRVD/SRV</TYPE>
-          <NAME>ZUI_PSPK_EMPLOYEE</NAME>
+          <NAME>ZUI_PSPK_VACATION_APPLICATION</NAME>
          </SRVD_REF>
          <BIND_TYPE_DATA>
           <CONTENT>

@@ -1,0 +1,5 @@
+CLASS zbp_pspk_employee DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zr_pspk_employee.
+ENDCLASS.
+
+CLASS zbp_pspk_employee IMPLEMENTATION.
+ENDCLASS.

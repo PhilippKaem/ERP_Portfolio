@@ -2,6 +2,7 @@
 @EndUserText.label: 'Employee'
 define root view entity ZR_PSPK_Employee as select from zpspk_emp_db
  composition [0..*] of ZR_PSPK_Vacation_Entitlement as _VacationEntitlements
+ composition [0..*] of ZR_PSPK_VACATION_APPLICATION as _VacationApplications
 {
     key id as EmployeeId,
     emp_employee_number as EmpEmployeeNumber,
@@ -14,5 +15,6 @@ define root view entity ZR_PSPK_Employee as select from zpspk_emp_db
     last_changed_at as LastChangedAt,
     
     /* Associations */
-    _VacationEntitlements // Make association public
+    _VacationEntitlements, 
+    _VacationApplications
 }

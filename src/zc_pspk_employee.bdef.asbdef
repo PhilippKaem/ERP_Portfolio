@@ -1,0 +1,26 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_PSPK_Employee alias Employee
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _VacationApplications { create; }
+  use association _VacationEntitlements { create; }
+}
+
+define behavior for ZC_PSPK_VACATION_APPLICATION //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _Employee;
+}
+
+define behavior for ZC_PSPK_Vacation_Entitlement //alias <alias_name>
+{
+
+  use association _Employee;
+}

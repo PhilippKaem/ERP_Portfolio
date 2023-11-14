@@ -2,4 +2,5 @@
 define service ZUI_PSPK_EMPLOYEE {
   expose ZC_PSPK_Employee             as Employee;
   expose ZC_PSPK_Vacation_Entitlement as VacationEntitlement;
+  expose ZC_PSPK_VACATION_APPLICATION as VacationApplication;
 }

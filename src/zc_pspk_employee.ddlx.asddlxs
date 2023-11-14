@@ -1,5 +1,3 @@
-
-
 @Metadata.layer: #CUSTOMER
 @UI.headerInfo: 
 { 
@@ -15,6 +13,8 @@ annotate entity ZC_PSPK_Employee
 
 @UI.facet: [
 { position:10, type: #FIELDGROUP_REFERENCE, targetQualifier: 'EmployeeInformation', label: 'Employee Information' },
+{ position:12, type: #LINEITEM_REFERENCE, targetElement: '_VacationApplications', label: 'Vacation Applications'},
+{ position:14, type: #LINEITEM_REFERENCE, targetElement: '_VacationEntitlements', label: 'Vacation Entitlements'},
 { position:20, type: #FIELDGROUP_REFERENCE, targetQualifier: 'AdminData', label: 'Adminstrative Data' }
 ]
 

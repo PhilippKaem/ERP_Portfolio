@@ -1,0 +1,81 @@
+managed implementation in class zbp_pspk_employee unique;
+strict ( 2 );
+
+define behavior for ZR_PSPK_Employee alias Employee
+persistent table zpspk_emp_db
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  association _VacationApplications { create; }
+  association _VacationEntitlements { create; }
+
+    field (readonly, numbering:managed) EmployeeId;
+
+    mapping for zpspk_emp_db corresponding {
+        EmployeeId = id;
+        EmpEmployeeNumber = emp_employee_number;
+        EmpFirstName = emp_first_name;
+        EmpLastName = emp_last_name;
+        EmpEntranceDate = emp_entrance_date;
+        CreatedBy = created_by;
+        CreatedAt = created_at;
+        LastChangedBy = last_changed_by;
+        LastChangedAt = last_changed_at;
+    }
+}
+
+/*Child Entity Vacation Application*/
+define behavior for ZR_PSPK_VACATION_APPLICATION alias VacationApplication
+persistent table zpspk_vac_app_db
+lock dependent by _Employee
+authorization dependent by _Employee
+//etag master <field_name>
+{
+  update;
+  delete;
+  field (readonly, numbering: managed)VacationApplicationId;
+  field ( readonly ) VacAppApplicant;
+  association _Employee;
+
+    mapping for zpspk_Vac_App_db corresponding {
+        VacationApplicationId = id;
+        VacAppApplicant = vac_app_applicant;
+        VacAppAuthorizer = vac_app_authorizer;
+        VacAppStartDate = vac_app_start_date;
+        VacAppEndDate = vac_app_end_date;
+        VacAppComment = vac_app_comment;
+        VacAppStatus = vac_app_status;
+        CreatedBy = created_by;
+        CreatedAt = created_at;
+        LastChangedBy = last_changed_by;
+        LastChangedAt = last_changed_at;
+  }
+}
+
+/*Child Entity Vacation Entitlement*/
+define behavior for ZR_PSPK_Vacation_Entitlement alias VacationEntitlement
+persistent table zpspk_vac_ent_db
+lock dependent by _Employee
+authorization dependent by _Employee
+//etag master <field_name>
+{
+
+  field (readonly, numbering: managed) VaciationEntitlementId;
+  field ( readonly ) VacEntEmployee;
+  association _Employee;
+
+    mapping for zpspk_Vac_Ent_db corresponding {
+        VaciationEntitlementId = id;
+        VacEntEmployee = vac_ent_employee;
+        VacEntYear = vac_ent_year;
+        VacVacationDays = vac_vacation_days;
+        CreatedBy = created_by;
+        CreatedAt = created_at;
+        LastChangedBy = last_changed_by;
+        LastChangedAt = last_changed_at;
+    }
+}

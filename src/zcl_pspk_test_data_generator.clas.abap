@@ -61,6 +61,90 @@ METHOD if_oo_adt_classrun~main.
   vacation_entitlement-vac_ent_employee = employee-id.
   append vacation_entitlement TO vacation_entitlements.
 
+  vacation_application-client = sy-mandt.
+  get time STAMP FIELD vacation_application-created_at.
+  vacation_application-created_by = 'PK'.
+  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
+  get time STAMP FIELD vacation_application-last_changed_at.
+  vacation_application-last_changed_by = 'PK'.
+  vacation_application-vac_app_applicant = employee-id.
+  vacation_application-vac_app_authorizer = 'Lisa Müller'.
+  vacation_application-vac_app_comment = 'Sommerurlaub'.
+  vacation_application-vac_app_end_date = '20220710'.
+  vacation_application-vac_app_start_date = '20220701'.
+  vacation_application-vac_app_status = 'G'.
+  APPEND vacation_application to vacation_applications.
+
+  vacation_application-client = sy-mandt.
+  get time STAMP FIELD vacation_application-created_at.
+  vacation_application-created_by = 'PK'.
+  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
+  get time STAMP FIELD vacation_application-last_changed_at.
+  vacation_application-last_changed_by = 'PK'.
+  vacation_application-vac_app_applicant = employee-id.
+  vacation_application-vac_app_authorizer = 'Lisa Müller'.
+  vacation_application-vac_app_comment = 'Weihnachtsurlaub'.
+  vacation_application-vac_app_end_date = '20221230'.
+  vacation_application-vac_app_start_date = '20221227'.
+  vacation_application-vac_app_status = 'A'.
+  APPEND vacation_application to vacation_applications.
+
+  vacation_application-client = sy-mandt.
+  get time STAMP FIELD vacation_application-created_at.
+  vacation_application-created_by = 'PK'.
+  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
+  get time STAMP FIELD vacation_application-last_changed_at.
+  vacation_application-last_changed_by = 'PK'.
+  vacation_application-vac_app_applicant = employee-id.
+  vacation_application-vac_app_authorizer = 'Lisa Müller'.
+  vacation_application-vac_app_comment = 'Weihnachtsurlaub (2. Versuch)'.
+  vacation_application-vac_app_end_date = '20221230'.
+  vacation_application-vac_app_start_date = '20221228'.
+  vacation_application-vac_app_status = 'G'.
+  APPEND vacation_application to vacation_applications.
+
+  vacation_application-client = sy-mandt.
+  get time STAMP FIELD vacation_application-created_at.
+  vacation_application-created_by = 'PK'.
+  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
+  get time STAMP FIELD vacation_application-last_changed_at.
+  vacation_application-last_changed_by = 'PK'.
+  vacation_application-vac_app_applicant = employee-id.
+  vacation_application-vac_app_authorizer = 'Lisa Müller'.
+  vacation_application-vac_app_comment = ''.
+  vacation_application-vac_app_end_date = '20230614'.
+  vacation_application-vac_app_start_date = '20230527'.
+  vacation_application-vac_app_status = 'G'.
+  APPEND vacation_application to vacation_applications.
+
+  vacation_application-client = sy-mandt.
+  get time STAMP FIELD vacation_application-created_at.
+  vacation_application-created_by = 'PK'.
+  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
+  get time STAMP FIELD vacation_application-last_changed_at.
+  vacation_application-last_changed_by = 'PK'.
+  vacation_application-vac_app_applicant = employee-id.
+  vacation_application-vac_app_authorizer = 'Lisa Müller'.
+  vacation_application-vac_app_comment = 'Winterurlaub'.
+  vacation_application-vac_app_end_date = '20231231'.
+  vacation_application-vac_app_start_date = '20231220'.
+  vacation_application-vac_app_status = 'B'.
+  APPEND vacation_application to vacation_applications.
+
+  vacation_application-client = sy-mandt.
+  get time STAMP FIELD vacation_application-created_at.
+  vacation_application-created_by = 'PK'.
+  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
+  get time STAMP FIELD vacation_application-last_changed_at.
+  vacation_application-last_changed_by = 'PK'.
+  vacation_application-vac_app_applicant = 'Petra Schmid'.
+  vacation_application-vac_app_authorizer = employee-id.
+  vacation_application-vac_app_comment = 'Weihnachtsurlaub'.
+  vacation_application-vac_app_end_date = '20231231'.
+  vacation_application-vac_app_start_date = '20231227'.
+  vacation_application-vac_app_status = 'B'.
+  APPEND vacation_application to vacation_applications.
+
 
   employee-emp_employee_number = 2.
   employee-emp_first_name = 'Lisa'.
@@ -112,92 +196,6 @@ METHOD if_oo_adt_classrun~main.
 
   INSERT ZPSPK_EMP_DB FROM TABLE @employees.
   INSERT zpspk_vac_ent_db FROM TABLE @vacation_entitlements.
-
-
-  vacation_application-client = sy-mandt.
-  get time STAMP FIELD vacation_application-created_at.
-  vacation_application-created_by = 'PK'.
-  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
-  get time STAMP FIELD vacation_application-last_changed_at.
-  vacation_application-last_changed_by = 'PK'.
-  vacation_application-vac_app_applicant = 'Hans Maier'.
-  vacation_application-vac_app_authorizer = 'Lisa Müller'.
-  vacation_application-vac_app_comment = 'Sommerurlaub'.
-  vacation_application-vac_app_end_date = '20220710'.
-  vacation_application-vac_app_start_date = '20220701'.
-  vacation_application-vac_app_status = 'G'.
-  APPEND vacation_application to vacation_applications.
-
-  vacation_application-client = sy-mandt.
-  get time STAMP FIELD vacation_application-created_at.
-  vacation_application-created_by = 'PK'.
-  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
-  get time STAMP FIELD vacation_application-last_changed_at.
-  vacation_application-last_changed_by = 'PK'.
-  vacation_application-vac_app_applicant = 'Hans Maier'.
-  vacation_application-vac_app_authorizer = 'Lisa Müller'.
-  vacation_application-vac_app_comment = 'Weihnachtsurlaub'.
-  vacation_application-vac_app_end_date = '20221230'.
-  vacation_application-vac_app_start_date = '20221227'.
-  vacation_application-vac_app_status = 'A'.
-  APPEND vacation_application to vacation_applications.
-
-  vacation_application-client = sy-mandt.
-  get time STAMP FIELD vacation_application-created_at.
-  vacation_application-created_by = 'PK'.
-  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
-  get time STAMP FIELD vacation_application-last_changed_at.
-  vacation_application-last_changed_by = 'PK'.
-  vacation_application-vac_app_applicant = 'Hans Maier'.
-  vacation_application-vac_app_authorizer = 'Lisa Müller'.
-  vacation_application-vac_app_comment = 'Weihnachtsurlaub (2. Versuch)'.
-  vacation_application-vac_app_end_date = '20221230'.
-  vacation_application-vac_app_start_date = '20221228'.
-  vacation_application-vac_app_status = 'G'.
-  APPEND vacation_application to vacation_applications.
-
-  vacation_application-client = sy-mandt.
-  get time STAMP FIELD vacation_application-created_at.
-  vacation_application-created_by = 'PK'.
-  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
-  get time STAMP FIELD vacation_application-last_changed_at.
-  vacation_application-last_changed_by = 'PK'.
-  vacation_application-vac_app_applicant = 'Hans Maier'.
-  vacation_application-vac_app_authorizer = 'Lisa Müller'.
-  vacation_application-vac_app_comment = ''.
-  vacation_application-vac_app_end_date = '20230614'.
-  vacation_application-vac_app_start_date = '20230527'.
-  vacation_application-vac_app_status = 'G'.
-  APPEND vacation_application to vacation_applications.
-
-  vacation_application-client = sy-mandt.
-  get time STAMP FIELD vacation_application-created_at.
-  vacation_application-created_by = 'PK'.
-  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
-  get time STAMP FIELD vacation_application-last_changed_at.
-  vacation_application-last_changed_by = 'PK'.
-  vacation_application-vac_app_applicant = 'Hans Maier'.
-  vacation_application-vac_app_authorizer = 'Lisa Müller'.
-  vacation_application-vac_app_comment = 'Winterurlaub'.
-  vacation_application-vac_app_end_date = '20231231'.
-  vacation_application-vac_app_start_date = '20231220'.
-  vacation_application-vac_app_status = 'B'.
-  APPEND vacation_application to vacation_applications.
-
-  vacation_application-client = sy-mandt.
-  get time STAMP FIELD vacation_application-created_at.
-  vacation_application-created_by = 'PK'.
-  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
-  get time STAMP FIELD vacation_application-last_changed_at.
-  vacation_application-last_changed_by = 'PK'.
-  vacation_application-vac_app_applicant = 'Petra Schmid'.
-  vacation_application-vac_app_authorizer = 'Hans Maier'.
-  vacation_application-vac_app_comment = 'Weihnachtsurlaub'.
-  vacation_application-vac_app_end_date = '20231231'.
-  vacation_application-vac_app_start_date = '20231227'.
-  vacation_application-vac_app_status = 'B'.
-  APPEND vacation_application to vacation_applications.
-
   INSERT zpspk_vac_app_db FROM TABLE @vacation_applications.
 
   ENDMETHOD.
