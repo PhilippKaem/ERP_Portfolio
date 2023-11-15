@@ -1,10 +1,10 @@
 @Metadata.layer: #CUSTOMER
 @UI.headerInfo: 
 { 
-typeNamePlural:'VacationApplications',
-typeName: 'VacationApplication',
-title.value: 'VacAppComment',
-description.value: 'VacAppStartDate'
+    typeNamePlural:'Vacation Applications',
+    typeName: 'Vacation Application',
+    title.value: 'VacAppComment',
+    description.value: 'VacAppStartDate'
 }
 annotate entity ZC_PSPK_Vacation_Application_2
     with 
@@ -12,8 +12,8 @@ annotate entity ZC_PSPK_Vacation_Application_2
 /*Facets*/
 
 @UI.facet: [
-{ position:10, type: #FIELDGROUP_REFERENCE, targetQualifier: 'VacationApplicationDetails', label: 'Vacation Application Details' },
-{ position:20, type: #FIELDGROUP_REFERENCE, targetQualifier: 'AdminData', label: 'Adminstrative Data' }
+    { position:10, type: #FIELDGROUP_REFERENCE, targetQualifier: 'VacationApplicationDetails', label: 'Vacation Application Details' },
+    { position:20, type: #FIELDGROUP_REFERENCE, targetQualifier: 'AdminData', label: 'Adminstrative Data' }
 ]
 
 /*Fields*/

@@ -1,8 +1,8 @@
 @Metadata.layer: #CUSTOMER
 @UI.headerInfo:
 {
-  typeName: 'VacationApplication',
-  typeNamePlural: 'VacationApplications',
+  typeName: 'Vacation Application',
+  typeNamePlural: 'Vacation Applications',
   title.value: 'VacAppComment',
   description.value: 'VacAppStartDate'
 }
