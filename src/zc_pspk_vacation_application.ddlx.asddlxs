@@ -6,7 +6,7 @@
   title.value: 'VacAppComment',
   description.value: 'VacAppStartDate'
 }
-annotate entity ZC_PSPK_VACATION_APPLICATION
+annotate entity ZC_PSPK_Vacation_Application
     with 
 {
 

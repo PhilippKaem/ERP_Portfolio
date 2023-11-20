@@ -2,9 +2,12 @@
 @EndUserText.label: 'Employee'
 define root view entity ZR_PSPK_Employee as select from zpspk_emp_db
  composition [0..*] of ZR_PSPK_Vacation_Entitlement as _VacationEntitlements
- composition [0..*] of ZR_PSPK_VACATION_APPLICATION as _VacationApplications
+ composition [0..*] of ZR_PSPK_Vacation_Application as _VacationApplications
 {
+
+    @EndUserText: {label: 'Employee Id', quickInfo: 'Employee Id'}
     key id as EmployeeId,
+    
     emp_employee_number as EmpEmployeeNumber,
     emp_first_name as EmpFirstName,
     emp_last_name as EmpLastName,
