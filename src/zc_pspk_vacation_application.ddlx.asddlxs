@@ -41,10 +41,10 @@ annotate entity ZC_PSPK_Vacation_Application
     @UI.fieldGroup: [{ position: 50, qualifier: 'VacationApplicationDetails' }]    
     VacAppComment;
     
-    @UI.lineItem: [{ position: 10 }]
-    @UI.fieldGroup: [{ position: 60, qualifier: 'VacationApplicationDetails' }]
+    @UI.lineItem: [{ position: 10, criticality: 'StatusCriticality' }]
+    @UI.fieldGroup: [{ position: 60, qualifier: 'VacationApplicationDetails', criticality: 'StatusCriticality' }]
     VacAppStatus;
-    
+
     @UI.fieldGroup: [{ position: 20, qualifier: 'AdminData' }]
     CreatedBy;
     

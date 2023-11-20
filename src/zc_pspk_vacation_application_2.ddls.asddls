@@ -5,9 +5,12 @@
 define root view entity ZC_PSPK_Vacation_Application_2 as projection on ZR_PSPK_Vacation_Application_2
 {
     key VacationApplicationId,
+    
+    @ObjectModel.text.element: [ 'ApplicantName' ]
     VacAppApplicant,
     
     @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_PSPK_AuthorizerVH', element: 'EmployeeId' }}]
+    @ObjectModel.text.element: [ 'AuthorizerName' ]
     VacAppAuthorizer,
     
     VacAppStartDate,
@@ -23,5 +26,10 @@ define root view entity ZC_PSPK_Vacation_Application_2 as projection on ZR_PSPK_
     CreatedBy,
     CreatedAt,
     LastChangedBy,
-    LastChangedAt
+    LastChangedAt,
+    
+    /* Transient Data */
+    ApplicantName,
+    AuthorizerName,
+    StatusCriticality
 }

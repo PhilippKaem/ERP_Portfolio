@@ -49,10 +49,10 @@ authorization dependent by _Employee
   update;
   delete;
 
-  association _Employee { with draft; }
-
   field ( readonly, numbering: managed ) VacationApplicationId;
   field ( readonly ) VacAppApplicant;
+
+  association _Employee { with draft; }
 
     mapping for zpspk_Vac_App_db corresponding {
         VacationApplicationId = id;
@@ -80,10 +80,10 @@ authorization dependent by _Employee
   update;
   delete;
 
-  association _Employee { with draft; }
-
   field ( readonly, numbering: managed ) VaciationEntitlementId;
   field ( readonly ) VacEntEmployee;
+
+    association _Employee { with draft; }
 
     mapping for zpspk_Vac_Ent_db corresponding {
         VaciationEntitlementId = id;
