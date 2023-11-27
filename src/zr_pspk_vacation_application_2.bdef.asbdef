@@ -1,0 +1,43 @@
+managed implementation in class zbp_pspk_vacation_application unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZR_PSPK_Vacation_Application_2 //alias <alias_name>
+persistent table zpspk_vac_app_db
+draft table zpspk_vac_app_d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+
+{
+  create;
+  update;
+  delete;
+
+  action ApproveVacationApplication result [1] $self;
+  action DeclineVacationApplication result [1] $self;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft determine action Prepare;
+  draft action Resume;
+
+  field ( readonly, numbering: managed ) VacationApplicationId;
+  field ( readonly ) VacAppApplicant;
+
+      mapping for zpspk_Vac_App_db corresponding {
+        VacationApplicationId = id;
+        VacAppApplicant = vac_app_applicant;
+        VacAppAuthorizer = vac_app_authorizer;
+        VacAppStartDate = vac_app_start_date;
+        VacAppEndDate = vac_app_end_date;
+        VacAppComment = vac_app_comment;
+        VacAppStatus = vac_app_status;
+        CreatedBy = created_by;
+        CreatedAt = created_at;
+        LastChangedBy = last_changed_by;
+        LastChangedAt = last_changed_at;
+  }
+
+}

@@ -36,7 +36,7 @@ METHOD if_oo_adt_classrun~main.
   get time STAMP FIELD employee-created_at.
   employee-last_changed_by = 'PK'.
   GET TIME STAMP FIELD employee-last_changed_at.
-  employee-id = 1.
+  employee-id = cl_system_uuid=>create_uuid_x16_static( ).
   append employee TO employees.
 
   vacation_entitlement-client = sy-mandt.
@@ -131,21 +131,6 @@ METHOD if_oo_adt_classrun~main.
   vacation_application-vac_app_status = 'B'.
   APPEND vacation_application to vacation_applications.
 
-  vacation_application-client = sy-mandt.
-  get time STAMP FIELD vacation_application-created_at.
-  vacation_application-created_by = 'PK'.
-  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
-  get time STAMP FIELD vacation_application-last_changed_at.
-  vacation_application-last_changed_by = 'PK'.
-  vacation_application-vac_app_applicant = 'Petra Schmid'.
-  vacation_application-vac_app_authorizer = 1.
-  vacation_application-vac_app_comment = 'Weihnachtsurlaub'.
-  vacation_application-vac_app_end_date = '20231231'.
-  vacation_application-vac_app_start_date = '20231227'.
-  vacation_application-vac_app_status = 'B'.
-  APPEND vacation_application to vacation_applications.
-
-
   employee-emp_employee_number = 2.
   employee-emp_first_name = 'Lisa'.
   employee-emp_last_name = 'Müller'.
@@ -155,7 +140,7 @@ METHOD if_oo_adt_classrun~main.
   get time STAMP FIELD employee-created_at.
   employee-last_changed_by = 'PK'.
   GET TIME STAMP FIELD employee-last_changed_at.
-  employee-id = 2.
+  employee-id = cl_system_uuid=>create_uuid_x16_static( ).
   append employee TO employees.
 
   vacation_entitlement-client = sy-mandt.
@@ -179,7 +164,7 @@ METHOD if_oo_adt_classrun~main.
   get time STAMP FIELD employee-created_at.
   employee-last_changed_by = 'PK'.
   GET TIME STAMP FIELD employee-last_changed_at.
-  employee-id = 3.
+  employee-id = cl_system_uuid=>create_uuid_x16_static( ).
   append employee TO employees.
 
   vacation_entitlement-client = sy-mandt.
@@ -192,6 +177,21 @@ METHOD if_oo_adt_classrun~main.
   vacation_entitlement-vac_vacation_days = 7.
   vacation_entitlement-vac_ent_employee = employee-id.
   append vacation_entitlement TO vacation_entitlements.
+
+  vacation_application-client = sy-mandt.
+  get time STAMP FIELD vacation_application-created_at.
+  vacation_application-created_by = 'PK'.
+  vacation_application-id = cl_system_uuid=>create_uuid_x16_static( ).
+  get time STAMP FIELD vacation_application-last_changed_at.
+  vacation_application-last_changed_by = 'PK'.
+  vacation_application-vac_app_applicant = employee-id.
+  vacation_application-vac_app_authorizer = 1.
+  vacation_application-vac_app_comment = 'Weihnachtsurlaub'.
+  vacation_application-vac_app_end_date = '20231231'.
+  vacation_application-vac_app_start_date = '20231227'.
+  vacation_application-vac_app_status = 'B'.
+  APPEND vacation_application to vacation_applications.
+
 
 
   INSERT ZPSPK_EMP_DB FROM TABLE @employees.
