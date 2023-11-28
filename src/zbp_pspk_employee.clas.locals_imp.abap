@@ -12,6 +12,8 @@ CLASS lhc_vacationapplication DEFINITION INHERITING FROM cl_abap_behavior_handle
       IMPORTING keys FOR VacationApplication~ValidateIfEndBeforeBegin.
     METHODS ValidateNotEnoughVacDays FOR VALIDATE ON SAVE
       IMPORTING keys FOR VacationApplication~ValidateNotEnoughVacDays.
+    METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
+      IMPORTING keys REQUEST requested_authorizations FOR VacationApplication RESULT result.
 *    METHODS DetermineResetVacAppStatus FOR DETERMINE ON MODIFY
 *      IMPORTING keys FOR VacationApplication~DetermineResetVacAppStatus.
 
@@ -190,12 +192,9 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD ValidateNotEnoughVacDays.
+  ENDMETHOD.
 
-
-
-
-
-
+  METHOD get_instance_authorizations.
   ENDMETHOD.
 
 ENDCLASS.
