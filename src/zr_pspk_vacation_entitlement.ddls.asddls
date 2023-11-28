@@ -12,9 +12,17 @@ association to parent ZR_PSPK_Employee as _Employee
     vac_ent_employee as VacEntEmployee,
     vac_ent_year as VacEntYear,
     vac_vacation_days as VacVacationDays,
+    
+    @Semantics.user.createdBy: true
     created_by as CreatedBy,
+    
+    @Semantics.systemDateTime.createdAt: true
     created_at as CreatedAt,
+    
+    @Semantics.user.lastChangedBy: true
     last_changed_by as LastChangedBy,
+    
+    @Semantics.systemDateTime.lastChangedAt: true
     last_changed_at as LastChangedAt,
     
     /* Transient Data */

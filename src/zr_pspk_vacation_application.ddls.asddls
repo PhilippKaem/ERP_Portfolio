@@ -20,9 +20,17 @@ association [1..1] to ZI_PSPK_VacAuthorizerText as _VacAuthorizerText on $projec
     vac_app_end_date as VacAppEndDate,
     vac_app_comment as VacAppComment,
     vac_app_status as VacAppStatus,
+    
+    @Semantics.user.createdBy: true
     created_by as CreatedBy,
+    
+    @Semantics.systemDateTime.createdAt: true
     created_at as CreatedAt,
+    
+    @Semantics.user.lastChangedBy: true
     last_changed_by as LastChangedBy,
+    
+    @Semantics.systemDateTime.lastChangedAt: true
     last_changed_at as LastChangedAt,
     
      /* Transient Data */

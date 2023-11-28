@@ -53,22 +53,48 @@ CLASS zcm_pspk_employee DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF already_approved_Vac_App_App2.
 
+      CONSTANTS:
+       BEGIN OF not_enough_days_Vac_App_Emp,
+        msgid TYPE symsgid      VALUE 'ZPSPK_EMP_DB',
+        msgno TYPE symsgno      VALUE '101',
+        attr1 TYPE scx_attrname VALUE 'VacAppComment',
+        attr2 TYPE scx_attrname VALUE '',
+        attr3 TYPE scx_attrname VALUE '',
+        attr4 TYPE scx_attrname VALUE '',
+      END OF not_enough_days_Vac_App_Emp.
 
- " Attributs
- DATA VacAppComment TYPE zpspk_comment.
-        METHODS constructor
-      IMPORTING
-        severity type if_abap_behv_message=>t_severity
-        !textid   LIKE if_t100_message=>t100key OPTIONAL
-        !previous LIKE previous OPTIONAL
-        VacAppComment TYPE zpspk_comment Optional.
+      CONSTANTS:
+       BEGIN OF end_before_begin_Vac_App_Emp,
+        msgid TYPE symsgid      VALUE 'ZPSPK_EMP_DB',
+        msgno TYPE symsgno      VALUE '102',
+        attr1 TYPE scx_attrname VALUE 'VacAppComment',
+        attr2 TYPE scx_attrname VALUE '',
+        attr3 TYPE scx_attrname VALUE '',
+        attr4 TYPE scx_attrname VALUE '',
+      END OF end_before_begin_Vac_App_Emp.
+
+
+     " Attributs
+     DATA VacAppComment TYPE zpspk_comment.
+
+
+     METHODS constructor
+          IMPORTING
+            severity type if_abap_behv_message=>t_severity
+            !textid   LIKE if_t100_message=>t100key OPTIONAL
+            !previous LIKE previous OPTIONAL
+            VacAppComment TYPE zpspk_comment Optional.
+
  PROTECTED SECTION.
-  PRIVATE SECTION.
+
+ PRIVATE SECTION.
+
 ENDCLASS.
 
 
-CLASS zcm_pspk_employee IMPLEMENTATION.
 
+
+CLASS zcm_pspk_employee IMPLEMENTATION.
 
   METHOD constructor ##ADT_SUPPRESS_GENERATION.
     CALL METHOD super->constructor
@@ -82,6 +108,6 @@ CLASS zcm_pspk_employee IMPLEMENTATION.
       if_t100_message~t100key = textid.
     ENDIF.
     me->vacappcomment = vacappcomment.
-     if_abap_behv_message~m_severity = severity.
+    if_abap_behv_message~m_severity = severity.
   ENDMETHOD.
 ENDCLASS.

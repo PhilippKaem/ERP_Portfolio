@@ -11,6 +11,18 @@
     <T100>
      <SPRSL>E</SPRSL>
      <ARBGB>ZPSPK_EMP_DB</ARBGB>
+     <MSGNR>101</MSGNR>
+     <TEXT>Not enough vacation days available to create the vacation application &amp;1</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPSPK_EMP_DB</ARBGB>
+     <MSGNR>102</MSGNR>
+     <TEXT>The end date of the vacation application &amp;1 is before the start date</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPSPK_EMP_DB</ARBGB>
      <MSGNR>201</MSGNR>
      <TEXT>The vacation application &amp;1 was successfully declined</TEXT>
     </T100>

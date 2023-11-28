@@ -16,6 +16,7 @@ define behavior for ZC_PSPK_Employee alias Employee
   use action Discard;
   use action Prepare;
   use action Resume;
+
 }
 
 define behavior for ZC_PSPK_Vacation_Application alias VacationApplication
@@ -24,6 +25,7 @@ define behavior for ZC_PSPK_Vacation_Application alias VacationApplication
   use delete;
 
   use association _Employee { with draft; }
+
 }
 
 define behavior for ZC_PSPK_Vacation_Entitlement alias VacationEntitlement

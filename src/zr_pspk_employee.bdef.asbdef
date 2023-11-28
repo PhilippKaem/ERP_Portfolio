@@ -46,11 +46,19 @@ lock dependent by _Employee
 authorization dependent by _Employee
 //etag master <field_name>
 {
+
+
+    determination DetermineVacApplicationStatus on modify { create; }
+//  determination DetermineVacationApplicationID on modify { create; }
+//  determination DetermineVacationApplicantID on modify { create; }
+
   update;
   delete;
 
-  field ( readonly, numbering: managed ) VacationApplicationId;
-  field ( readonly ) VacAppApplicant;
+  field ( readonly, numbering:managed ) VacationApplicationId;
+  field ( mandatory : create ) VacAppAuthorizer, VacAppStartDate, VacAppEndDate;
+  field ( readonly : update ) VacAppAuthorizer, VacAppStartDate, VacAppEndDate;
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, VacAppApplicant, VacAppStatus;
 
   association _Employee { with draft; }
 
