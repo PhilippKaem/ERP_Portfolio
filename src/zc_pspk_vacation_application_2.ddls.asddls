@@ -31,5 +31,6 @@ define root view entity ZC_PSPK_Vacation_Application_2 as projection on ZR_PSPK_
     /* Transient Data */
     ApplicantName,
     AuthorizerName,
+    StatusName,
     StatusCriticality
 }

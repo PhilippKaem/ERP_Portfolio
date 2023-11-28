@@ -3,6 +3,7 @@
 define root view entity ZR_PSPK_Vacation_Application_2 as select from zpspk_vac_app_db
 association [1..1] to ZI_PSPK_VacApplicantText as _VacApplicantText on $projection.VacAppApplicant = _VacApplicantText.VacationApplicantId
 association [1..1] to ZI_PSPK_VacAuthorizerText as _VacAuthorizerText on $projection.VacAppAuthorizer = _VacAuthorizerText.VacationAuthorizerId
+association [1..1] to ZI_PSPK_StatusText as _StatusText on $projection.VacationApplicationId = _StatusText.VacationApplicationID
 {
     
     @EndUserText: {label: 'Vacation Application Id', quickInfo: 'Vacation Application Id'}
@@ -17,6 +18,8 @@ association [1..1] to ZI_PSPK_VacAuthorizerText as _VacAuthorizerText on $projec
     vac_app_start_date as VacAppStartDate,
     vac_app_end_date as VacAppEndDate,
     vac_app_comment as VacAppComment,
+    
+    @ObjectModel.text.element: [ 'StatusName' ]
     vac_app_status as VacAppStatus,
     
     @Semantics.user.createdBy: true
@@ -34,7 +37,14 @@ association [1..1] to ZI_PSPK_VacAuthorizerText as _VacAuthorizerText on $projec
      /* Transient Data */
     _VacApplicantText.ApplicantName as ApplicantName,
     _VacAuthorizerText.AuthorizerName as AuthorizerName,
-        case when vac_app_status = 'G' then 3 
+    
+    case when vac_app_status = 'G' then _StatusText.StatusNameG 
+        when vac_app_status = 'B' then _StatusText.StatusNameB 
+        when vac_app_status = 'A' then _StatusText.StatusNameA 
+        else null
+        end as StatusName,
+        
+    case when vac_app_status = 'G' then 3 
         when vac_app_status = 'B' then 2
         when vac_app_status = 'A' then 1
         else 0

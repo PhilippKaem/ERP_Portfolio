@@ -26,6 +26,7 @@ define view entity ZC_PSPK_Vacation_Application as projection on ZR_PSPK_Vacatio
     /* Transient Data */
     ApplicantName,
     AuthorizerName,
+    StatusName,
     StatusCriticality,
     
     /* Associations */
