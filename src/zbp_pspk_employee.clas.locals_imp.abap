@@ -139,7 +139,7 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
 
     " Read Vacation Applications
     READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
-        FIELDS ( VacAppStatus )
+        ALL FIELDS
         WITH CORRESPONDING #( keys )
         RESULT DATA(vacationApplications).
 
@@ -165,6 +165,37 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD ValidateNotEnoughVacDays.
+
+    DATA message TYPE REF TO zcm_pspk_employee.
+
+    " Read Vacation Applications
+    READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
+        ALL FIELDS
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(vacationApplications).
+
+    " Process Vacation Applications
+    LOOP AT vacationapplications INTO DATA(vacationApplication).
+
+        " Calculate the necessary Vacation Days
+        DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
+        DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = vacationapplication-VacAppStartDate iv_end = vacationapplication-VacAppEndDate ).
+
+        " Validate Vacation Application and create Error Message ---> 10 als Platzhalter!! -> bitte ändern!
+        IF 10 < working_days.
+
+            message = new zcm_pspk_employee(
+                severity = if_abap_behv_message=>severity-error
+                textid = zcm_pspk_employee=>not_enough_days_vac_app_emp vacappcomment = vacationapplication-VacAppComment ).
+            APPEND VALUE #( %tky     = VacationApplication-%tky
+                            %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
+                            %msg     = message ) TO reported-vacationapplication.
+            APPEND VALUE #( %tky = VacationApplication-%tky ) TO failed-vacationapplication.
+
+        ENDIF.
+
+    ENDLOOP.
+
   ENDMETHOD.
 
   METHOD get_instance_authorizations.
