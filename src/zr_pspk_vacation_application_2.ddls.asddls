@@ -22,6 +22,9 @@ association [1..1] to ZI_PSPK_StatusText as _StatusText on $projection.VacationA
     @ObjectModel.text.element: [ 'StatusName' ]
     vac_app_status as VacAppStatus,
     
+    @EndUserText: {label: 'Vacation Days', quickInfo: 'Vacation Days'}
+    vac_app_planned_vac_days as VacAppVacDays,
+    
     @Semantics.user.createdBy: true
     created_by as CreatedBy,
     

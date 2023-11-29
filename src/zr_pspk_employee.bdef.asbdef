@@ -65,7 +65,7 @@ authorization dependent by _Employee
 
   field ( readonly, numbering:managed ) VacationApplicationId;
   field ( mandatory : create ) VacAppAuthorizer, VacAppStartDate, VacAppEndDate;
-  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, VacAppApplicant, VacAppStatus;
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, VacAppApplicant, VacAppStatus, VacAppVacDays;
 
   association _Employee { with draft; }
 
@@ -77,6 +77,7 @@ authorization dependent by _Employee
         VacAppEndDate = vac_app_end_date;
         VacAppComment = vac_app_comment;
         VacAppStatus = vac_app_status;
+        VacAppVacDays = vac_app_planned_vac_days;
         CreatedBy = created_by;
         CreatedAt = created_at;
         LastChangedBy = last_changed_by;

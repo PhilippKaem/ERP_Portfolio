@@ -181,8 +181,8 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
         DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
         DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = vacationapplication-VacAppStartDate iv_end = vacationapplication-VacAppEndDate ).
 
-        " Validate Vacation Application and create Error Message ---> 10 als Platzhalter!! -> bitte ändern!
-        IF 10 < working_days.
+        " Validate Vacation Application and create Error Message
+           IF vacationapplication-VacAppVacDays <= working_days.
 
             message = new zcm_pspk_employee(
                 severity = if_abap_behv_message=>severity-error

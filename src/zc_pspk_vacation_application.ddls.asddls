@@ -18,6 +18,8 @@ define view entity ZC_PSPK_Vacation_Application as projection on ZR_PSPK_Vacatio
     @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_PSPK_StatusVH', element: 'Status' } }]
     VacAppStatus,
     
+    VacAppVacDays,
+    
     CreatedBy,
     CreatedAt,
     LastChangedBy,

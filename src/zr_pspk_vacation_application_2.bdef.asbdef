@@ -24,7 +24,7 @@ authorization master ( instance )
   draft action Resume;
 
   field ( readonly, numbering: managed ) VacationApplicationId;
-  field ( readonly ) VacAppApplicant;
+  field ( readonly ) VacAppApplicant, VacAppVacDays;
 
       mapping for zpspk_Vac_App_db corresponding {
         VacationApplicationId = id;
@@ -34,6 +34,7 @@ authorization master ( instance )
         VacAppEndDate = vac_app_end_date;
         VacAppComment = vac_app_comment;
         VacAppStatus = vac_app_status;
+        VacAppVacDays = vac_app_planned_vac_days;
         CreatedBy = created_by;
         CreatedAt = created_at;
         LastChangedBy = last_changed_by;

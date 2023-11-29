@@ -54,6 +54,10 @@ annotate entity ZC_PSPK_Vacation_Application_2
     @UI.fieldGroup: [{ position:20, qualifier: 'VacationApplicationDetails', criticality: 'StatusCriticality'}]
     VacAppStatus;
     
+    @UI.lineItem: [{ position: 70 }]
+    @UI.fieldGroup: [{ position:70, qualifier: 'VacationApplicationDetails' }]
+    VacAppVacDays;
+    
     @UI.fieldGroup: [{ position:20, qualifier: 'AdminData' }]
     CreatedBy;
     

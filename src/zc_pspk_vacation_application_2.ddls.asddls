@@ -23,6 +23,8 @@ define root view entity ZC_PSPK_Vacation_Application_2 as projection on ZR_PSPK_
     @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_PSPK_StatusVH', element: 'Status' } }]
     VacAppStatus,
     
+    VacAppVacDays,
+    
     CreatedBy,
     CreatedAt,
     LastChangedBy,
