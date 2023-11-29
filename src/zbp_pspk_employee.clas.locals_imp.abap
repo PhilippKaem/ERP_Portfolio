@@ -14,8 +14,8 @@ CLASS lhc_vacationapplication DEFINITION INHERITING FROM cl_abap_behavior_handle
       IMPORTING keys FOR VacationApplication~ValidateNotEnoughVacDays.
     METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
       IMPORTING keys REQUEST requested_authorizations FOR VacationApplication RESULT result.
-*    METHODS DetermineResetVacAppStatus FOR DETERMINE ON MODIFY
-*      IMPORTING keys FOR VacationApplication~DetermineResetVacAppStatus.
+    METHODS DetermineResetVacAppStatus FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR VacationApplication~DetermineResetVacAppStatus.
 
 ENDCLASS.
 
@@ -107,58 +107,31 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
   ENDMETHOD.
 
 
-*  METHOD DetermineResetVacAppStatus.
-*
-*    " Read Vacation Applications
-*    READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
-*        FIELDS ( VacAppStatus )
-*        WITH CORRESPONDING #( keys )
-*        RESULT DATA(vacationApplications).
-*
-*
-**    LOOP AT vacationApplications REFERENCE INTO DATA(vacationApplication).
-*
-*      " Check Vacation Application Status
-**      IF vacationapplication->VacAppStatus = 'A'.
-*
-*        " Modify Vacation Applications
-*        MODIFY ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
-*               UPDATE FIELDS ( VacAppStatus )
-*               WITH VALUE #( FOR v IN vacationApplications
-*                             ( %tky = v-%tky
-*                               VacAppStatus = 'B' ) ).
-**      ENDIF.
-*
-**    ENDLOOP.
-*
-**    " Read Vacation Applications
-**    READ ENTITY IN LOCAL MODE ZR_PSPK_Employee
-**         ALL FIELDS
-**         WITH CORRESPONDING #( keys )
-**         RESULT DATA(employees)
-**         BY \_VacationApplications
-**         ALL FIELDS
-**         WITH CORRESPONDING #( keys )
-**         RESULT DATA(vacationApplications).
-**
-**    " Process Vacation Applications
-**    LOOP AT vacationApplications REFERENCE INTO DATA(vacationApplication).
-**
-**      " Set Vacation Application ID
-**      IF vacationapplication->VacAppStatus = 'A'.
-**        vacationapplication->VacAppStatus = 'B'.
-**      ENDIF.
-**
-**    ENDLOOP.
-**
-**    " Modify Vacation Applications
-**    MODIFY ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
-**           UPDATE FIELDS ( VacAppStatus )
-**           WITH VALUE #( FOR v IN vacationapplications
-**                         ( %tky     = v-%tky
-**                           VacAppStatus = v-VacAppStatus ) ).
-*
-*  ENDMETHOD.
+  METHOD DetermineResetVacAppStatus.
+
+    " Read Vacation Applications
+    READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
+        FIELDS ( VacAppStatus )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(vacationApplications).
+
+    " Process Vacation Applications
+    LOOP AT vacationApplications REFERENCE INTO DATA(vacationApplication).
+
+      IF vacationapplication->VacAppStatus = 'G'.
+
+        " Modify Vacation Applications
+        MODIFY ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
+        UPDATE FIELDS ( VacAppStatus )
+        WITH VALUE #( FOR v IN vacationApplications
+                      ( %tky = v-%tky
+                        VacAppStatus = 'B' ) ).
+
+      ENDIF.
+
+    ENDLOOP.
+
+  ENDMETHOD.
 
   METHOD ValidateIfEndBeforeBegin.
 
