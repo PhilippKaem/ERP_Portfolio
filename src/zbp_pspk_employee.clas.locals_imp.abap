@@ -16,6 +16,8 @@ CLASS lhc_vacationapplication DEFINITION INHERITING FROM cl_abap_behavior_handle
       IMPORTING keys REQUEST requested_authorizations FOR VacationApplication RESULT result.
     METHODS DetermineResetVacAppStatus FOR DETERMINE ON MODIFY
       IMPORTING keys FOR VacationApplication~DetermineResetVacAppStatus.
+    METHODS DetermineVacationDays FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR VacationApplication~DetermineVacationDays.
 
 ENDCLASS.
 
@@ -182,7 +184,7 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
         DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = vacationapplication-VacAppStartDate iv_end = vacationapplication-VacAppEndDate ).
 
         " Validate Vacation Application and create Error Message
-           IF vacationapplication-VacAppVacDays <= working_days.
+        IF 30 > working_days.
 
             message = new zcm_pspk_employee(
                 severity = if_abap_behv_message=>severity-error
@@ -199,6 +201,32 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD get_instance_authorizations.
+  ENDMETHOD.
+
+  METHOD DetermineVacationDays.
+
+    " Read Vacation Applications
+    READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
+        ALL FIELDS
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(vacationApplications).
+
+    " Process Vacation Applications
+    LOOP AT vacationapplications INTO DATA(vacationApplication).
+
+        " Calculate the necessary Vacation Days
+        DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
+        DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = vacationapplication-VacAppStartDate iv_end = vacationapplication-VacAppEndDate ).
+
+        " Modify Vacation Applications
+        MODIFY ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
+        UPDATE FIELDS ( VacAppVacDays )
+        WITH VALUE #( FOR v IN vacationApplications
+                      ( %tky = v-%tky
+                        VacAppVacDays = working_days + 1 ) ).
+
+    ENDLOOP.
+
   ENDMETHOD.
 
 ENDCLASS.

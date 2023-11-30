@@ -51,6 +51,7 @@ authorization dependent by _Employee
   determination DetermineVacationApplicantID on modify { create; }
   determination DetermineVacApplicationStatus on modify { create; }
   determination DetermineResetVacAppStatus on modify { field VacAppAuthorizer, VacAppStartDate, VacAppEndDate, VacAppComment; }
+  determination DetermineVacationDays on modify { create; }
 
   determine action ValidateVacationApplication{
     validation ValidateNotEnoughVacDays;
