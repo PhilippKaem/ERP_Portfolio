@@ -40,6 +40,18 @@ annotate entity ZC_PSPK_Employee
     @UI.fieldGroup: [{ position:40, qualifier: 'EmployeeInformation' }]
     EmpEntranceDate;
     
+    @UI.lineItem: [{ position: 50 }]
+    @UI.fieldGroup: [{ position:50, qualifier: 'EmployeeInformation' }]
+    VacVacationDays;
+    
+    @UI.lineItem: [{ position: 60 }]
+    @UI.fieldGroup: [{ position:60, qualifier: 'EmployeeInformation' }]
+    VacAppPlannedVacDaysB;
+    
+    @UI.lineItem: [{ position: 70 }]
+    @UI.fieldGroup: [{ position:70, qualifier: 'EmployeeInformation' }]
+    VacAppPlannedVacDaysG;
+    
     @UI.fieldGroup: [{ position:20, qualifier: 'AdminData' }]
     CreatedBy;
     

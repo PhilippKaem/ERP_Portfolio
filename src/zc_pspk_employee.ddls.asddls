@@ -21,8 +21,13 @@ define root view entity ZC_PSPK_Employee as projection on ZR_PSPK_Employee
     LastChangedBy,
     LastChangedAt,
     
+    /* Transient Data */
+    VacVacationDays,
+    VacAppPlannedVacDaysB,
+    VacAppPlannedVacDaysG,
+    
     /* Associations */
     _VacationEntitlements : redirected to composition child ZC_PSPK_Vacation_Entitlement,
-    _VacationApplications : redirected to composition child ZC_PSPK_VACATION_APPLICATION
+    _VacationApplications : redirected to composition child ZC_PSPK_Vacation_Application
     
 }

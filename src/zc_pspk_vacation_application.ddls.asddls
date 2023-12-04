@@ -4,6 +4,7 @@
 define view entity ZC_PSPK_Vacation_Application as projection on ZR_PSPK_Vacation_Application
 {
     key VacationApplicationId,
+    
     @ObjectModel.text.element: [ 'ApplicantName' ]
     VacAppApplicant,
     
@@ -30,6 +31,7 @@ define view entity ZC_PSPK_Vacation_Application as projection on ZR_PSPK_Vacatio
     AuthorizerName,
     StatusName,
     StatusCriticality,
+    VacVacationDays,   
     
     /* Associations */
     _Employee : redirected to parent ZC_PSPK_Employee

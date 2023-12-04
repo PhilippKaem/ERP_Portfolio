@@ -4,6 +4,7 @@ define view entity ZR_PSPK_Vacation_Entitlement as select from zpspk_vac_ent_db
 association to parent ZR_PSPK_Employee as _Employee
     on $projection.VacEntEmployee = _Employee.EmployeeId
     association [1..1] to ZI_PSPK_VacEntEmployeeText as _VacEntEmployeeText on $projection.VacEntEmployee = _VacEntEmployeeText.VacationEntEmployeeId
+    
 {
 
     @EndUserText: {label: 'Vaciation Entitlement Id', quickInfo: 'Vaciation Entitlement Id'}

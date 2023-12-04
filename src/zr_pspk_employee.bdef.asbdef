@@ -24,6 +24,7 @@ authorization master ( instance )
   draft action Resume;
 
   field ( readonly, numbering:managed ) EmployeeId;
+  field ( readonly ) EmpEmployeeNumber, EmpFirstName, EmpLastName, EmpEntranceDate, VacAppPlannedVacDaysB, VacAppPlannedVacDaysG, VacVacationDays, CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
 
   mapping for zpspk_emp_db corresponding {
         EmployeeId = id;
@@ -51,14 +52,14 @@ authorization dependent by _Employee
   determination DetermineVacationApplicantID on modify { create; }
   determination DetermineVacApplicationStatus on modify { create; }
   determination DetermineResetVacAppStatus on modify { field VacAppAuthorizer, VacAppStartDate, VacAppEndDate, VacAppComment; }
-  determination DetermineVacationDays on modify { create; }
+  determination DetermineVacationDays on modify { create; field VacAppStartDate, VacAppEndDate; }
 
   determine action ValidateVacationApplication{
     validation ValidateNotEnoughVacDays;
     validation ValidateIfEndBeforeBegin;
   }
 
-  validation ValidateNotEnoughVacDays on save { create; }
+  validation ValidateNotEnoughVacDays on save { create; update; }
   validation ValidateIfEndBeforeBegin on save { create; update; }
 
   update;
