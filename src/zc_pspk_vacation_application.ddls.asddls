@@ -31,7 +31,9 @@ define view entity ZC_PSPK_Vacation_Application as projection on ZR_PSPK_Vacatio
     AuthorizerName,
     StatusName,
     StatusCriticality,
-    VacVacationDays,   
+    VacVacationDays,
+    VacAppPlannedVacDaysB,
+    VacAppPlannedVacDaysG,
     
     /* Associations */
     _Employee : redirected to parent ZC_PSPK_Employee

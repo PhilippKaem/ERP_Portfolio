@@ -45,11 +45,12 @@ association [1..1] to ZR_PSPK_VACATION_APP_SUM_G as _VAC_APP_SUM_G on $projectio
      /* Transient Data */
     _VacApplicantText.ApplicantName as ApplicantName,
     _VacAuthorizerText.AuthorizerName as AuthorizerName,
+    
     _ENT_SUM.VacVacationDays as VacVacationDays,
     _VAC_APP_SUM_B.VacAppPlannedVacDaysB as VacAppPlannedVacDaysB,
     _VAC_APP_SUM_G.VacAppPlannedVacDaysG as VacAppPlannedVacDaysG,
     
-    
+    /* Cases */
     case when vac_app_status = 'G' then _StatusText.StatusNameG 
         when vac_app_status = 'B' then _StatusText.StatusNameB 
         when vac_app_status = 'A' then _StatusText.StatusNameA 
