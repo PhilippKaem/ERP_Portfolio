@@ -14,8 +14,9 @@ authorization master ( instance )
   update;
   delete;
 
-  association _VacationApplications { create; with draft;}
-  association _VacationEntitlements { create; with draft;}
+  /* associations*/
+  association _VacationApplications { create; with draft; }
+  association _VacationEntitlements { create; with draft; }
 
   draft action Activate optimized;
   draft action Discard;
@@ -23,19 +24,20 @@ authorization master ( instance )
   draft determine action Prepare;
   draft action Resume;
 
-  field ( readonly, numbering:managed ) EmployeeId;
+  field ( readonly, numbering : managed ) EmployeeId;
   field ( readonly ) EmpEmployeeNumber, EmpFirstName, EmpLastName, EmpEntranceDate, VacAppPlannedVacDaysB, VacAppPlannedVacDaysG, VacVacationDays, CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
 
-  mapping for zpspk_emp_db corresponding {
-        EmployeeId = id;
-        EmpEmployeeNumber = emp_employee_number;
-        EmpFirstName = emp_first_name;
-        EmpLastName = emp_last_name;
-        EmpEntranceDate = emp_entrance_date;
-        CreatedBy = created_by;
-        CreatedAt = created_at;
-        LastChangedBy = last_changed_by;
-        LastChangedAt = last_changed_at;
+  mapping for zpspk_emp_db corresponding
+    {
+      EmployeeId        = id;
+      EmpEmployeeNumber = emp_employee_number;
+      EmpFirstName      = emp_first_name;
+      EmpLastName       = emp_last_name;
+      EmpEntranceDate   = emp_entrance_date;
+      CreatedBy         = created_by;
+      CreatedAt         = created_at;
+      LastChangedBy     = last_changed_by;
+      LastChangedAt     = last_changed_at;
     }
 }
 
@@ -47,45 +49,47 @@ lock dependent by _Employee
 authorization dependent by _Employee
 //etag master <field_name>
 {
-
+  /* determinations*/
   determination DetermineVacationApplicationID on modify { create; }
   determination DetermineVacationApplicantID on modify { create; }
   determination DetermineVacApplicationStatus on modify { create; }
+  determination DetermineResetVacAppStatus on modify { field VacAppAuthorizer, VacAppStartDate, VacAppEndDate, VacAppComment; }
+  determination DetermineVacationDays on modify { create; field VacAppStartDate, VacAppEndDate; }
 
-  determine action ValidateVacationApplication{
+  /* validations*/
+  validation ValidateIfEndBeforeBegin on save { create; update; }
+  validation ValidateNotEnoughVacDays on save { create; }
+  determine action ValidateVacationApplication
+  {
     validation ValidateIfEndBeforeBegin;
     validation ValidateNotEnoughVacDays;
   }
 
-  determination DetermineResetVacAppStatus on modify { field VacAppAuthorizer, VacAppStartDate, VacAppEndDate, VacAppComment; }
-  determination DetermineVacationDays on modify { create; field VacAppStartDate, VacAppEndDate; }
-
-  validation ValidateIfEndBeforeBegin on save { create; update; }
-  validation ValidateNotEnoughVacDays on save { create; }
-
   update;
   delete;
 
-  field ( readonly, numbering:managed ) VacationApplicationId;
+  field ( readonly, numbering : managed ) VacationApplicationId;
   field ( mandatory : create ) VacAppAuthorizer, VacAppStartDate, VacAppEndDate;
   field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, VacAppApplicant, VacAppStatus, VacAppVacDays;
 
+  /* associations*/
   association _Employee { with draft; }
 
-    mapping for zpspk_Vac_App_db corresponding {
-        VacationApplicationId = id;
-        VacAppApplicant = vac_app_applicant;
-        VacAppAuthorizer = vac_app_authorizer;
-        VacAppStartDate = vac_app_start_date;
-        VacAppEndDate = vac_app_end_date;
-        VacAppComment = vac_app_comment;
-        VacAppStatus = vac_app_status;
-        VacAppVacDays = vac_app_planned_vac_days;
-        CreatedBy = created_by;
-        CreatedAt = created_at;
-        LastChangedBy = last_changed_by;
-        LastChangedAt = last_changed_at;
-  }
+  mapping for zpspk_vac_app_db corresponding
+    {
+      VacationApplicationId = id;
+      VacAppApplicant       = vac_app_applicant;
+      VacAppAuthorizer      = vac_app_authorizer;
+      VacAppStartDate       = vac_app_start_date;
+      VacAppEndDate         = vac_app_end_date;
+      VacAppComment         = vac_app_comment;
+      VacAppStatus          = vac_app_status;
+      VacAppVacDays         = vac_app_planned_vac_days;
+      CreatedBy             = created_by;
+      CreatedAt             = created_at;
+      LastChangedBy         = last_changed_by;
+      LastChangedAt         = last_changed_at;
+    }
 }
 
 /*Child Entity Vacation Entitlement*/
@@ -99,19 +103,21 @@ authorization dependent by _Employee
   update;
   delete;
 
-  field ( readonly, numbering: managed ) VaciationEntitlementId;
+  field ( readonly, numbering : managed ) VaciationEntitlementId;
   field ( readonly ) VacEntEmployee;
 
-    association _Employee { with draft; }
+  /* associations*/
+  association _Employee { with draft; }
 
-    mapping for zpspk_Vac_Ent_db corresponding {
-        VaciationEntitlementId = id;
-        VacEntEmployee = vac_ent_employee;
-        VacEntYear = vac_ent_year;
-        VacVacationDays = vac_vacation_days;
-        CreatedBy = created_by;
-        CreatedAt = created_at;
-        LastChangedBy = last_changed_by;
-        LastChangedAt = last_changed_at;
+  mapping for zpspk_vac_ent_db corresponding
+    {
+      VaciationEntitlementId = id;
+      VacEntEmployee         = vac_ent_employee;
+      VacEntYear             = vac_ent_year;
+      VacVacationDays        = vac_vacation_days;
+      CreatedBy              = created_by;
+      CreatedAt              = created_at;
+      LastChangedBy          = last_changed_by;
+      LastChangedAt          = last_changed_at;
     }
 }

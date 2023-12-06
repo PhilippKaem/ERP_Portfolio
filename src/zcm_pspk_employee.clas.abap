@@ -11,10 +11,10 @@ CLASS zcm_pspk_employee DEFINITION
     INTERFACES if_t100_message .
     INTERFACES if_t100_dyn_msg .
 
-    " Message Constants
 
-      CONSTANTS:
-       BEGIN OF declined_Vac_App_App2,
+    " Message Constants
+    CONSTANTS:
+      BEGIN OF declined_Vac_App_App2,
         msgid TYPE symsgid      VALUE 'ZPSPK_EMP_DB',
         msgno TYPE symsgno      VALUE '201',
         attr1 TYPE scx_attrname VALUE 'VacAppComment',
@@ -23,8 +23,8 @@ CLASS zcm_pspk_employee DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF declined_Vac_App_App2.
 
-     CONSTANTS:
-       BEGIN OF approved_Vac_App_App2,
+    CONSTANTS:
+      BEGIN OF approved_Vac_App_App2,
         msgid TYPE symsgid      VALUE 'ZPSPK_EMP_DB',
         msgno TYPE symsgno      VALUE '202',
         attr1 TYPE scx_attrname VALUE 'VacAppComment',
@@ -33,8 +33,8 @@ CLASS zcm_pspk_employee DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF approved_Vac_App_App2.
 
-     CONSTANTS:
-       BEGIN OF already_declined_Vac_App_App2,
+    CONSTANTS:
+      BEGIN OF already_declined_Vac_App_App2,
         msgid TYPE symsgid      VALUE 'ZPSPK_EMP_DB',
         msgno TYPE symsgno      VALUE '203',
         attr1 TYPE scx_attrname VALUE 'VacAppComment',
@@ -43,8 +43,8 @@ CLASS zcm_pspk_employee DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF already_declined_Vac_App_App2.
 
-      CONSTANTS:
-       BEGIN OF already_approved_Vac_App_App2,
+    CONSTANTS:
+      BEGIN OF already_approved_Vac_App_App2,
         msgid TYPE symsgid      VALUE 'ZPSPK_EMP_DB',
         msgno TYPE symsgno      VALUE '204',
         attr1 TYPE scx_attrname VALUE 'VacAppComment',
@@ -53,8 +53,8 @@ CLASS zcm_pspk_employee DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF already_approved_Vac_App_App2.
 
-      CONSTANTS:
-       BEGIN OF not_enough_days_Vac_App_Emp,
+    CONSTANTS:
+      BEGIN OF not_enough_days_Vac_App_Emp,
         msgid TYPE symsgid      VALUE 'ZPSPK_EMP_DB',
         msgno TYPE symsgno      VALUE '101',
         attr1 TYPE scx_attrname VALUE 'VacAppComment',
@@ -63,8 +63,8 @@ CLASS zcm_pspk_employee DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF not_enough_days_Vac_App_Emp.
 
-      CONSTANTS:
-       BEGIN OF end_before_begin_Vac_App_Emp,
+    CONSTANTS:
+      BEGIN OF end_before_begin_Vac_App_Emp,
         msgid TYPE symsgid      VALUE 'ZPSPK_EMP_DB',
         msgno TYPE symsgno      VALUE '102',
         attr1 TYPE scx_attrname VALUE 'VacAppComment',
@@ -74,20 +74,20 @@ CLASS zcm_pspk_employee DEFINITION
       END OF end_before_begin_Vac_App_Emp.
 
 
-     " Attributs
-     DATA VacAppComment TYPE zpspk_comment.
+    " Attributs
+    DATA VacAppComment TYPE zpspk_comment.
 
 
-     METHODS constructor
-          IMPORTING
-            severity type if_abap_behv_message=>t_severity
-            !textid   LIKE if_t100_message=>t100key OPTIONAL
-            !previous LIKE previous OPTIONAL
-            VacAppComment TYPE zpspk_comment Optional.
+    METHODS constructor
+      IMPORTING
+        severity      TYPE if_abap_behv_message=>t_severity
+        !textid       LIKE if_t100_message=>t100key OPTIONAL
+        !previous     LIKE previous OPTIONAL
+        VacAppComment TYPE zpspk_comment OPTIONAL.
 
- PROTECTED SECTION.
+  PROTECTED SECTION.
 
- PRIVATE SECTION.
+  PRIVATE SECTION.
 
 ENDCLASS.
 

@@ -6,8 +6,7 @@
   title.value: 'VacVacationDays',
   description.value: 'VacEntYear'
 }
-annotate entity ZC_PSPK_Vacation_Entitlement
-    with 
+annotate entity ZC_PSPK_Vacation_Entitlement with
 {
   /* Facets */
   @UI.facet:
@@ -17,29 +16,31 @@ annotate entity ZC_PSPK_Vacation_Entitlement
   ]
 
   /* Fields */
-    
-    @UI.fieldGroup: [{ position: 10, qualifier: 'AdminData' }]
-    VaciationEntitlementId;
-   
-    @UI.fieldGroup: [{ position: 10, qualifier: 'VacationEntitlementDetails' }]
-    VacEntEmployee;
-    @UI.lineItem: [{ position: 10 }]
-    @UI.fieldGroup: [{ position: 20, qualifier: 'VacationEntitlementDetails' }]
-    VacEntYear;
-    @UI.lineItem: [{ position: 20 }]
-    @UI.fieldGroup: [{ position: 30, qualifier: 'VacationEntitlementDetails' }]
-    VacVacationDays;
-    
-    @UI.fieldGroup: [{ position: 20, qualifier: 'AdminData' }]
-    CreatedBy;
-    
-    @UI.fieldGroup: [{ position: 30, qualifier: 'AdminData' }]
-    CreatedAt;
-    
-    @UI.fieldGroup: [{ position: 40, qualifier: 'AdminData' }]    
-    LastChangedBy;
-    
-    @UI.fieldGroup: [{ position: 50, qualifier: 'AdminData' }]
-    LastChangedAt;
-    
+
+  @UI.fieldGroup: [{ position: 10, qualifier: 'AdminData' }]
+  VaciationEntitlementId;
+
+  @UI.fieldGroup: [{ position: 10, qualifier: 'VacationEntitlementDetails' }]
+  VacEntEmployee;
+  
+  @UI.lineItem: [{ position: 10 }]
+  @UI.fieldGroup: [{ position: 20, qualifier: 'VacationEntitlementDetails' }]
+  VacEntYear;
+  
+  @UI.lineItem: [{ position: 20 }]
+  @UI.fieldGroup: [{ position: 30, qualifier: 'VacationEntitlementDetails' }]
+  VacVacationDays;
+
+  @UI.fieldGroup: [{ position: 20, qualifier: 'AdminData' }]
+  CreatedBy;
+
+  @UI.fieldGroup: [{ position: 30, qualifier: 'AdminData' }]
+  CreatedAt;
+
+  @UI.fieldGroup: [{ position: 40, qualifier: 'AdminData' }]
+  LastChangedBy;
+
+  @UI.fieldGroup: [{ position: 50, qualifier: 'AdminData' }]
+  LastChangedAt;
+
 }

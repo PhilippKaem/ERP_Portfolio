@@ -17,16 +17,19 @@ CLASS lhc_ZR_PSPK_Vacation_Applicati IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD ApproveVacationApplication.
-  DATA message TYPE REF TO zcm_pspk_employee.
-  " Read Vacation Applications
-  READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application_2
-   FIELDS ( VacAppStatus VacAppComment )
-  WITH CORRESPONDING #( keys )
-  RESULT DATA(VacationApplications).
-  " Process
-   LOOP AT VacationApplications REFERENCE INTO DATA(VacationApplication).
-  " Validate Status and Create Error Message
-  IF VacationApplication->VacAppStatus = 'G'.
+    DATA message TYPE REF TO zcm_pspk_employee.
+
+    " Read Vacation Applications
+    READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application_2
+    FIELDS ( VacAppStatus VacAppComment )
+    WITH CORRESPONDING #( keys )
+    RESULT DATA(VacationApplications).
+
+    " Process
+    LOOP AT VacationApplications REFERENCE INTO DATA(VacationApplication).
+
+      " Validate Status and Create Error Message
+      IF VacationApplication->VacAppStatus = 'G'.
         message = NEW zcm_pspk_employee(
          severity = if_abap_behv_message=>severity-error
          textid = zcm_pspk_employee=>already_approved_vac_app_app2
@@ -35,7 +38,7 @@ CLASS lhc_ZR_PSPK_Vacation_Applicati IMPLEMENTATION.
                         %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
                         %msg     = message ) TO reported-zr_pspk_vacation_application_2.
         APPEND VALUE #( %tky = VacationApplication->%tky ) TO failed-zr_pspk_vacation_application_2.
-           delete VacationApplications index sy-tabix.
+        DELETE VacationApplications INDEX sy-tabix.
         CONTINUE.
       ENDIF.
 
@@ -48,94 +51,94 @@ CLASS lhc_ZR_PSPK_Vacation_Applicati IMPLEMENTATION.
                         %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
                         %msg     = message ) TO reported-zr_pspk_vacation_application_2.
         APPEND VALUE #( %tky = VacationApplication->%tky ) TO failed-zr_pspk_vacation_application_2.
-           delete VacationApplications index sy-tabix.
+        DELETE VacationApplications INDEX sy-tabix.
         CONTINUE.
       ENDIF.
 
-    "Set Status to Approved and Create Success Message
-    vacationapplication->VacAppStatus = 'G'.
-        message = new zcm_pspk_employee(
-    severity = if_abap_behv_message=>severity-success
-    textid = zcm_pspk_employee=>approved_vac_app_app2
-    vacappcomment = vacationapplication->VacAppComment ).
+      "Set Status to Approved and Create Success Message
+      vacationapplication->VacAppStatus = 'G'.
+      message = NEW zcm_pspk_employee(
+      severity = if_abap_behv_message=>severity-success
+      textid = zcm_pspk_employee=>approved_vac_app_app2
+      vacappcomment = vacationapplication->VacAppComment ).
 
-    APPEND VALUE #( %tky = vacationapplication->%tky
-                    %element = value #( VacAppStatus = if_abap_behv=>mk-on )
-                    %msg = message ) to reported-zr_pspk_vacation_application_2.
+      APPEND VALUE #( %tky = vacationapplication->%tky
+                      %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
+                      %msg = message ) TO reported-zr_pspk_vacation_application_2.
 
-    "Modify Vacationapplications
-    Modify entity in local mode ZR_PSPK_Vacation_Application_2
-        UPDATE FIELDS ( VacAppStatus )
-        WITH VALUE #( for t in VacationApplications ( %tky = t-%tky VacAppStatus = t-VacAppStatus ) ).
+      "Modify Vacationapplications
+      MODIFY ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application_2
+          UPDATE FIELDS ( VacAppStatus )
+          WITH VALUE #( FOR t IN VacationApplications ( %tky = t-%tky VacAppStatus = t-VacAppStatus ) ).
 
-    "Set Result
-    result = VALUE #( FOR t IN VacationApplications
-                      ( %tky   = t-%tky
-                        %param = t ) ).
-  ENDLOOP.
+      "Set Result
+      result = VALUE #( FOR t IN VacationApplications
+                        ( %tky   = t-%tky
+                          %param = t ) ).
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD DeclineVacationApplication.
 
     DATA message TYPE REF TO zcm_pspk_employee.
 
-      " Read Vacation Applications
-      READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application_2
-       FIELDS ( VacAppStatus VacAppComment )
-      WITH CORRESPONDING #( keys )
-      RESULT DATA(VacationApplications).
+    " Read Vacation Applications
+    READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application_2
+    FIELDS ( VacAppStatus VacAppComment )
+    WITH CORRESPONDING #( keys )
+    RESULT DATA(VacationApplications).
 
-  " Process
-   LOOP AT VacationApplications REFERENCE INTO DATA(VacationApplication).
+    " Process
+    LOOP AT VacationApplications REFERENCE INTO DATA(VacationApplication).
 
-  " Validate Status and Create Error Message
-  IF VacationApplication->VacAppStatus = 'G'.
+      " Validate Status and Create Error Message
+      IF VacationApplication->VacAppStatus = 'G'.
         message = NEW zcm_pspk_employee(
-         severity = if_abap_behv_message=>severity-error
-         textid = zcm_pspk_employee=>already_approved_vac_app_app2
+        severity = if_abap_behv_message=>severity-error
+        textid = zcm_pspk_employee=>already_approved_vac_app_app2
                                   vacappcomment = vacationapplication->VacAppComment ).
         APPEND VALUE #( %tky     = VacationApplication->%tky
                         %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
                         %msg     = message ) TO reported-zr_pspk_vacation_application_2.
         APPEND VALUE #( %tky = VacationApplication->%tky ) TO failed-zr_pspk_vacation_application_2.
-           delete VacationApplications index sy-tabix.
+        DELETE VacationApplications INDEX sy-tabix.
         CONTINUE.
       ENDIF.
 
       IF VacationApplication->VacAppStatus = 'A'.
         message = NEW zcm_pspk_employee(
-         severity = if_abap_behv_message=>severity-error
-         textid = zcm_pspk_employee=>already_declined_vac_app_app2
+        severity = if_abap_behv_message=>severity-error
+        textid = zcm_pspk_employee=>already_declined_vac_app_app2
                                   vacappcomment = vacationapplication->VacAppComment ).
         APPEND VALUE #( %tky     = VacationApplication->%tky
                         %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
                         %msg     = message ) TO reported-zr_pspk_vacation_application_2.
         APPEND VALUE #( %tky = VacationApplication->%tky ) TO failed-zr_pspk_vacation_application_2.
-           delete VacationApplications index sy-tabix.
+        DELETE VacationApplications INDEX sy-tabix.
         CONTINUE.
       ENDIF.
 
-    "Set Status to Declined and Create Success Message
-    vacationapplication->VacAppStatus = 'A'.
-        message = new zcm_pspk_employee(
-    severity = if_abap_behv_message=>severity-success
-    textid = zcm_pspk_employee=>declined_vac_app_app2
-    vacappcomment = vacationapplication->VacAppComment ).
+      "Set Status to Declined and Create Success Message
+      vacationapplication->VacAppStatus = 'A'.
+      message = NEW zcm_pspk_employee(
+      severity = if_abap_behv_message=>severity-success
+      textid = zcm_pspk_employee=>declined_vac_app_app2
+      vacappcomment = vacationapplication->VacAppComment ).
 
-    APPEND VALUE #( %tky = vacationapplication->%tky
-                    %element = value #( VacAppStatus = if_abap_behv=>mk-on )
-                    %msg = message ) to reported-zr_pspk_vacation_application_2.
+      APPEND VALUE #( %tky = vacationapplication->%tky
+                      %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
+                      %msg = message ) TO reported-zr_pspk_vacation_application_2.
 
-    "Modify Vacationapplications
-    Modify entity in local mode ZR_PSPK_Vacation_Application_2
-        UPDATE FIELDS ( VacAppStatus )
-        WITH VALUE #( for t in VacationApplications ( %tky = t-%tky VacAppStatus = t-VacAppStatus ) ).
+      "Modify Vacationapplications
+      MODIFY ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application_2
+          UPDATE FIELDS ( VacAppStatus )
+          WITH VALUE #( FOR t IN VacationApplications ( %tky = t-%tky VacAppStatus = t-VacAppStatus ) ).
 
-    "Set Result
-    result = VALUE #( FOR t IN VacationApplications
-                      ( %tky   = t-%tky
-                        %param = t ) ).
-  ENDLOOP.
+      "Set Result
+      result = VALUE #( FOR t IN VacationApplications
+                        ( %tky   = t-%tky
+                          %param = t ) ).
+    ENDLOOP.
 
   ENDMETHOD.
 

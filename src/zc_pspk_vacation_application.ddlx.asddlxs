@@ -6,8 +6,7 @@
   title.value: 'VacAppComment',
   description.value: 'VacAppStartDate'
 }
-annotate entity ZC_PSPK_Vacation_Application
-    with 
+annotate entity ZC_PSPK_Vacation_Application with
 {
 
   /* Facets */
@@ -18,47 +17,47 @@ annotate entity ZC_PSPK_Vacation_Application
   ]
 
   /* Fields */
-    @UI.fieldGroup: [{ position: 10, qualifier: 'AdminData' }]
-    VacationApplicationId;
-    
-   
-    @UI.fieldGroup: [{ position: 10, qualifier: 'VacationApplicationDetails' }]
-    VacAppApplicant;
-    
-    @UI.lineItem: [{ position: 20 }]
-    @UI.fieldGroup: [{ position: 20, qualifier: 'VacationApplicationDetails' }]
-    VacAppAuthorizer;
-    
-    @UI.lineItem: [{ position: 30 }]
-    @UI.fieldGroup: [{ position: 30, qualifier: 'VacationApplicationDetails' }]    
-    VacAppStartDate;
-    
-    @UI.lineItem: [{ position: 40 }]
-    @UI.fieldGroup: [{ position: 40, qualifier: 'VacationApplicationDetails' }]    
-    VacAppEndDate;
-    
-    @UI.lineItem: [{ position: 50 }]
-    @UI.fieldGroup: [{ position: 50, qualifier: 'VacationApplicationDetails' }]    
-    VacAppComment;
-    
-    @UI.lineItem: [{ position: 10, criticality: 'StatusCriticality' }]
-    @UI.fieldGroup: [{ position: 60, qualifier: 'VacationApplicationDetails', criticality: 'StatusCriticality' }]
-    VacAppStatus;
+  @UI.fieldGroup: [{ position: 10, qualifier: 'AdminData' }]
+  VacationApplicationId;
 
-    @UI.lineItem: [{ position: 70 }]
-    @UI.fieldGroup: [{ position:70, qualifier: 'VacationApplicationDetails' }]
-    VacAppVacDays;
-    
-    @UI.fieldGroup: [{ position: 20, qualifier: 'AdminData' }]
-    CreatedBy;
-    
-    @UI.fieldGroup: [{ position: 30, qualifier: 'AdminData' }]
-    CreatedAt;
-    
-    @UI.fieldGroup: [{ position: 40, qualifier: 'AdminData' }]    
-    LastChangedBy;
-    
-    @UI.fieldGroup: [{ position: 50, qualifier: 'AdminData' }]
-    LastChangedAt;
-    
+
+  @UI.fieldGroup: [{ position: 10, qualifier: 'VacationApplicationDetails' }]
+  VacAppApplicant;
+
+  @UI.lineItem: [{ position: 20 }]
+  @UI.fieldGroup: [{ position: 20, qualifier: 'VacationApplicationDetails' }]
+  VacAppAuthorizer;
+
+  @UI.lineItem: [{ position: 30 }]
+  @UI.fieldGroup: [{ position: 30, qualifier: 'VacationApplicationDetails' }]
+  VacAppStartDate;
+
+  @UI.lineItem: [{ position: 40 }]
+  @UI.fieldGroup: [{ position: 40, qualifier: 'VacationApplicationDetails' }]
+  VacAppEndDate;
+
+  @UI.lineItem: [{ position: 50 }]
+  @UI.fieldGroup: [{ position: 50, qualifier: 'VacationApplicationDetails' }]
+  VacAppComment;
+
+  @UI.lineItem: [{ position: 10, criticality: 'StatusCriticality' }]
+  @UI.fieldGroup: [{ position: 60, qualifier: 'VacationApplicationDetails', criticality: 'StatusCriticality' }]
+  VacAppStatus;
+
+  @UI.lineItem: [{ position: 70 }]
+  @UI.fieldGroup: [{ position:70, qualifier: 'VacationApplicationDetails' }]
+  VacAppVacDays;
+
+  @UI.fieldGroup: [{ position: 20, qualifier: 'AdminData' }]
+  CreatedBy;
+
+  @UI.fieldGroup: [{ position: 30, qualifier: 'AdminData' }]
+  CreatedAt;
+
+  @UI.fieldGroup: [{ position: 40, qualifier: 'AdminData' }]
+  LastChangedBy;
+
+  @UI.fieldGroup: [{ position: 50, qualifier: 'AdminData' }]
+  LastChangedAt;
+
 }

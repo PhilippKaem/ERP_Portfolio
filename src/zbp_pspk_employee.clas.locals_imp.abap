@@ -72,8 +72,8 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
 
       LOOP AT employees REFERENCE INTO DATA(employee).
 
-          " Set Vacation Applicant ID
-          vacationapplicant->VacAppApplicant = employee->EmployeeId.
+        " Set Vacation Applicant ID
+        vacationapplicant->VacAppApplicant = employee->EmployeeId.
 
       ENDLOOP.
 
@@ -118,19 +118,18 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
     " Process Vacation Applications
     LOOP AT vacationapplications INTO DATA(vacationApplication).
 
-        " Validate Vacation Application and create Error Message
-        IF vacationapplication-VacAppEndDate < vacationapplication-VacAppStartDate.
+      " Validate Vacation Application and create Error Message
+      IF vacationapplication-VacAppEndDate < vacationapplication-VacAppStartDate.
 
-            message = new zcm_pspk_employee(
-                severity = if_abap_behv_message=>severity-error
-                textid = zcm_pspk_employee=>end_before_begin_vac_app_emp vacappcomment = vacationapplication-VacAppComment ).
-            APPEND VALUE #( %tky     = VacationApplication-%tky
-                            %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
-                            %msg     = message ) TO reported-vacationapplication.
-            APPEND VALUE #( %tky = VacationApplication-%tky ) TO failed-vacationapplication.
+        message = NEW zcm_pspk_employee(
+            severity = if_abap_behv_message=>severity-error
+            textid = zcm_pspk_employee=>end_before_begin_vac_app_emp vacappcomment = vacationapplication-VacAppComment ).
+        APPEND VALUE #( %tky     = VacationApplication-%tky
+                        %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
+                        %msg     = message ) TO reported-vacationapplication.
+        APPEND VALUE #( %tky = VacationApplication-%tky ) TO failed-vacationapplication.
 
-
-        ENDIF.
+      ENDIF.
 
     ENDLOOP.
 
@@ -178,27 +177,31 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
     " Process Vacation Applications
     LOOP AT vacationapplications INTO DATA(vacationApplication).
 
-        " Calculate the necessary Vacation Days
-        try.
-            data(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
-          catch cx_fhc_runtime.
-            "handle exception
-            RETURN.
-        endtry.
+      " Calculate the necessary Vacation Days
+      TRY.
+          DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
+        CATCH cx_fhc_runtime.
 
-        try.
-            data(working_days) = calendar->calc_workingdays_between_dates( iv_start = vacationapplication-vacappstartdate iv_end = vacationapplication-vacappenddate ).
-          catch cx_fhc_runtime.
-            "handle exception
-            RETURN.
-        endtry.
+          "handle exception
+          RETURN.
 
-        " Modify Vacation Applications
-        MODIFY ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
-        UPDATE FIELDS ( VacAppVacDays )
-        WITH VALUE #( FOR v IN vacationApplications
-                      ( %tky = v-%tky
-                        VacAppVacDays = working_days + 1 ) ).
+      ENDTRY.
+
+      TRY.
+          DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = vacationapplication-vacappstartdate iv_end = vacationapplication-vacappenddate ).
+        CATCH cx_fhc_runtime.
+
+          "handle exception
+          RETURN.
+
+      ENDTRY.
+
+      " Modify Vacation Applications
+      MODIFY ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application
+      UPDATE FIELDS ( VacAppVacDays )
+      WITH VALUE #( FOR v IN vacationApplications
+                    ( %tky = v-%tky
+                      VacAppVacDays = working_days + 1 ) ).
 
     ENDLOOP.
 
@@ -217,37 +220,39 @@ CLASS lhc_vacationapplication IMPLEMENTATION.
     " Process Vacation Applications
     LOOP AT vacationapplications INTO DATA(vacationApplication).
 
-        " Calculate the necessary Vacation Days
-        try.
-            data(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
-          catch cx_fhc_runtime.
-            "handle exception
-            RETURN.
-        endtry.
+      " Calculate the necessary Vacation Days
+      TRY.
+          DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
+        CATCH cx_fhc_runtime.
 
-        try.
-            data(application_days) = calendar->calc_workingdays_between_dates( iv_start = vacationapplication-vacappstartdate iv_end = vacationapplication-vacappenddate ) + 1.
-          catch cx_fhc_runtime.
-            "handle exception
-            RETURN.
-        endtry.
+          "handle exception
+          RETURN.
+      ENDTRY.
 
-        SELECT SINGLE FROM zpspk_vac_ent_db FIELDS SUM( vac_vacation_days ) WHERE vac_ent_employee = @vacationapplication-VacAppApplicant INTO @DATA(vac_all_days).
-        SELECT SINGLE FROM zpspk_vac_app_db FIELDS SUM( vac_app_planned_vac_days ) WHERE vac_app_applicant = @vacationapplication-VacAppApplicant AND vac_app_status = 'B' INTO @DATA(vac_all_planned_b_days).
-        SELECT SINGLE FROM zpspk_vac_app_db FIELDS SUM( vac_app_planned_vac_days ) WHERE vac_app_applicant = @vacationapplication-VacAppApplicant AND vac_app_status = 'G' INTO @DATA(vac_all_planned_g_days).
+      TRY.
+          DATA(application_days) = calendar->calc_workingdays_between_dates( iv_start = vacationapplication-vacappstartdate iv_end = vacationapplication-vacappenddate ) + 1.
+        CATCH cx_fhc_runtime.
 
-        DATA(free_vac_days) = vac_all_days - vac_all_planned_b_days - vac_all_planned_g_days.
+          "handle exception
+          RETURN.
+      ENDTRY.
 
-        " Validate Vacation Application and create Error Message
-        IF application_days > free_vac_days.
-            message = new zcm_pspk_employee(
-                severity = if_abap_behv_message=>severity-error
-                textid = zcm_pspk_employee=>not_enough_days_vac_app_emp vacappcomment = vacationapplication-VacAppComment ).
-            APPEND VALUE #( %tky     = VacationApplication-%tky
-                            %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
-                            %msg     = message ) TO reported-vacationapplication.
-            APPEND VALUE #( %tky = VacationApplication-%tky ) TO failed-vacationapplication.
-        ENDIF.
+      SELECT SINGLE FROM zpspk_vac_ent_db FIELDS SUM( vac_vacation_days ) WHERE vac_ent_employee = @vacationapplication-VacAppApplicant INTO @DATA(vac_all_days).
+      SELECT SINGLE FROM zpspk_vac_app_db FIELDS SUM( vac_app_planned_vac_days ) WHERE vac_app_applicant = @vacationapplication-VacAppApplicant AND vac_app_status = 'B' INTO @DATA(vac_all_planned_b_days).
+      SELECT SINGLE FROM zpspk_vac_app_db FIELDS SUM( vac_app_planned_vac_days ) WHERE vac_app_applicant = @vacationapplication-VacAppApplicant AND vac_app_status = 'G' INTO @DATA(vac_all_planned_g_days).
+
+      DATA(free_vac_days) = vac_all_days - vac_all_planned_b_days - vac_all_planned_g_days.
+
+      " Validate Vacation Application and create Error Message
+      IF application_days > free_vac_days.
+        message = NEW zcm_pspk_employee(
+            severity = if_abap_behv_message=>severity-error
+            textid = zcm_pspk_employee=>not_enough_days_vac_app_emp vacappcomment = vacationapplication-VacAppComment ).
+        APPEND VALUE #( %tky     = VacationApplication-%tky
+                        %element = VALUE #( VacAppStatus = if_abap_behv=>mk-on )
+                        %msg     = message ) TO reported-vacationapplication.
+        APPEND VALUE #( %tky = VacationApplication-%tky ) TO failed-vacationapplication.
+      ENDIF.
 
     ENDLOOP.
 
