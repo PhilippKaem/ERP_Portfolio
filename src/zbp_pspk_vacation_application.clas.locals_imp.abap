@@ -79,11 +79,11 @@ CLASS lhc_ZR_PSPK_Vacation_Applicati IMPLEMENTATION.
 
     DATA message TYPE REF TO zcm_pspk_employee.
 
-  " Read Vacation Applications
-  READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application_2
-   FIELDS ( VacAppStatus VacAppComment )
-  WITH CORRESPONDING #( keys )
-  RESULT DATA(VacationApplications).
+      " Read Vacation Applications
+      READ ENTITY IN LOCAL MODE ZR_PSPK_Vacation_Application_2
+       FIELDS ( VacAppStatus VacAppComment )
+      WITH CORRESPONDING #( keys )
+      RESULT DATA(VacationApplications).
 
   " Process
    LOOP AT VacationApplications REFERENCE INTO DATA(VacationApplication).
@@ -136,6 +136,7 @@ CLASS lhc_ZR_PSPK_Vacation_Applicati IMPLEMENTATION.
                       ( %tky   = t-%tky
                         %param = t ) ).
   ENDLOOP.
+
   ENDMETHOD.
 
 ENDCLASS.

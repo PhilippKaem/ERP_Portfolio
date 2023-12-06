@@ -265,8 +265,6 @@ CLASS lhc_Employee DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
 ENDCLASS.
 
-
-
 CLASS lhc_Employee IMPLEMENTATION.
 
   METHOD get_instance_authorizations.
